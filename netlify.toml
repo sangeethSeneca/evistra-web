@@ -1,4 +1,10 @@
 [build]
   command = "yarn build"
   publish = "dist"
-  node_version = "16"
+  node_version = "14.17.0"
+  publish = ".next"
+  
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+
