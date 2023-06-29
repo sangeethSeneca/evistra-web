@@ -14,11 +14,7 @@ function Login(props) {
     reviewCount: 34,
     rating: 4,
   };
-  return (
-    <>
-     Login
-    </>
-  );
+  return <>Loginkjwhfowehf</>;
 }
 
 export default Login;
