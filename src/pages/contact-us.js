@@ -6,6 +6,6 @@ export default function Contactus() {
  
 
   return (
-    <></>
+    <>Conatct us</>
   );
 }
