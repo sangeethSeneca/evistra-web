@@ -1,0 +1,26 @@
+{
+  "name": "pers-bio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.0.13",
+    "@chakra-ui/react": "^1.6.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.6",
+    "framer-motion": "^4",
+    "next": "10.2.0",
+    "react": "17.0.2",
+    "react-alice-carousel": "^2.5.1",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0",
+    "react-reveal": "^1.2.2",
+    "react-scroll": "^1.8.2",
+    "styled-components": "^5.3.0"
+  }
+}
