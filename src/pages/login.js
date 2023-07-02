@@ -14,7 +14,22 @@ function Login(props) {
     reviewCount: 34,
     rating: 4,
   };
-  return <>Loginkjwhfowehf</>;
+  return (
+    <div>
+      <h2>EVISTRA lOGIN</h2>
+      <form>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" value={email} />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" value={password} />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 }
 
 export default Login;
