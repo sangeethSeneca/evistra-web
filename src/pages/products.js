@@ -1,8 +1,19 @@
 import React from "react";
-import { Box, Center, Grid, Stack } from "@chakra-ui/react";
-import { PhoneIcon, AddIcon, EmailIcon } from "@chakra-ui/icons";
-import { AiOutlineFacebook, AiOutlineLinkedin } from "react-icons/ai";
-import { Icon, Button } from "@chakra-ui/react";
+
+import { products } from "../components/Products/data";
+import ProductCard from "../components/Products/productCard";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 function Products(props) {
   const bgImage = {
@@ -16,7 +27,20 @@ function Products(props) {
   };
   return (
     <>
-     Products
+      <h2>Products List</h2>
+      <Grid container spacing={2}>
+        {products.map((product, index) => (
+          <Grid item xs={4} key={product.id}>
+            <Item>
+              <ProductCard
+                price={product.price}
+                name={product.name}
+                image={`${product.image}${index}.jpg`}
+              />
+            </Item>
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }
