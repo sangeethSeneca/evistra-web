@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ImageSlider from "../components/Home/ImageSlider";
 
 export default function Home() {
   const [navClass, setClass] = useState("notSticky");
@@ -10,8 +11,7 @@ export default function Home() {
   ];
   return (
     <>
-      Home
-    
+      <ImageSlider />
     </>
   );
 }
