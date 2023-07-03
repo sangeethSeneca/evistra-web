@@ -1,7 +1,6 @@
 {
-  "name": "pers-bio",
+  "name": "evistra-web",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,6 +19,7 @@
     "react-alice-carousel": "^2.5.1",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-reveal": "^1.2.2",
     "react-scroll": "^1.8.2",
     "styled-components": "^5.3.0"
