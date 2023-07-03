@@ -1,24 +1,112 @@
-import React from "react";
-import { Box, Center, Grid, Stack } from "@chakra-ui/react";
-import { PhoneIcon, AddIcon, EmailIcon } from "@chakra-ui/icons";
-import { AiOutlineFacebook, AiOutlineLinkedin } from "react-icons/ai";
-import { Icon, Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-function Login(props) {
-  const bgImage = {
-    imageUrl: "./images/bg.jpeg",
-    beds: 3,
-    baths: 2,
-    title: "Modern home in city center in the heart of historic Los Angeles",
-    formattedPrice: "$1,900.00",
-    reviewCount: 34,
-    rating: 4,
+export default function Login() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform signup logic here
+  };
+
   return (
-    <>
-     Login
-    </>
+    <div style={styles.container}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h2 style={styles.center}>Sign In Page</h2>
+        <div style={styles.formGroup}>
+          <label>
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Email"
+              style={styles.input}
+              required
+            />
+          </label>
+        </div>
+        <div style={styles.formGroup}>
+          <label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+              style={styles.input}
+              required
+            />
+          </label>
+        </div>
+        <div style={styles.center}>
+          <button type="submit" style={styles.button}>
+            Sign in
+          </button>
+        </div>
+        <div style={styles.center}>
+          <button
+            onClick={() => router.push("/signup")}
+            style={styles.SignUpButton}
+          >
+            Sign up
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
-export default Login;
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "90vh",
+  },
+  form: {
+    width: "500px",
+    padding: "20px",
+    border: "5px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f2f2f2",
+  },
+  formGroup: {
+    marginBottom: "10px",
+  },
+  inputName: {
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "5px",
+    width: "48%",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    fontSize: "16px",
+    borderRadius: "5px",
+  },
+  center: {
+    textAlign: "center",
+  },
+  button: {
+    fontSize: "20px",
+    backgroundColor: "#3f7000",
+  },
+  SignUpButton: {
+    marginTop: "5px",
+    fontSize: "20px",
+    textAlign: "center",
+    backgroundColor: "yellow",
+  },
+};
