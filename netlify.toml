@@ -4,7 +4,7 @@ package = "@netlify/plugin-nextjs"
 [build]
   command = "yarn build"
   publish = ".next"
-  node_version = "16.8.0"
+  node_version = "16.16.0"
 
 
 
