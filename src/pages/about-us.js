@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function AboutUs() {
   return (
-    <>
+    <div style={{ height: "80vh" }}>
       <h1>About Us</h1>
       <p>
         Welcome to our website! We are a team of passionate individuals
@@ -25,6 +25,6 @@ export default function AboutUs() {
       </p>
       <p>Thank you for visiting our website. We look forward to serving you!</p>
           
-    </>
+    </div>
   );
 }

@@ -4,8 +4,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 const ProductDetailContainer = styled("div")({
-  display: "flex",
   alignItems: "center",
+  height: "80vh",
+  width: "100%",
+  display: "flex",
 });
 
 const ProductImage = styled("img")({
@@ -41,7 +43,7 @@ const AddToCartButton = styled(Button)({
 
 function ProductDetailPage() {
   const product = {
-    image: "./images/bg.jpeg",
+    image: "images/1.jpg",
     name: "Modern home in city center in the heart of historic Los Angeles",
     price: "$1,900.00",
     features: "Spacious rooms, central location, modern amenities",
@@ -53,29 +55,32 @@ function ProductDetailPage() {
   };
 
   return (
-    <div>
-      <ProductDetailContainer>
-        <ProductImage src={product.image} alt="Product" />
-        <div>
-          <ProductName variant="h2" component="h1">
-            {product.name}
-          </ProductName>
-          <Price variant="h4" component="h2">
-            {product.price}
-          </Price>
-          <Subheading variant="subtitle1">
-            Spacious home with modern amenities
-          </Subheading>
-          <Features variant="h2" component="h2">
-            Features
-          </Features>
-          <Typography variant="body1">{product.features}</Typography>
-          <AddToCartButton variant="contained" onClick={handleAddToCart}>
-            Add to Cart
-          </AddToCartButton>
-        </div>
-      </ProductDetailContainer>
-    </div>
+    <ProductDetailContainer>
+      <ProductImage
+        src={product.image}
+        width={400}
+        height={600}
+        alt="Product"
+      />
+      <div>
+        <ProductName variant="h2" component="h1">
+          {product.name}
+        </ProductName>
+        <Price variant="h4" component="h2">
+          {product.price}
+        </Price>
+        <Subheading variant="subtitle1">
+          Spacious home with modern amenities
+        </Subheading>
+        <Features variant="h2" component="h2">
+          Features
+        </Features>
+        <Typography variant="body1">{product.features}</Typography>
+        <AddToCartButton variant="contained" onClick={handleAddToCart}>
+          Add to Cart
+        </AddToCartButton>
+      </div>
+    </ProductDetailContainer>
   );
 }
 

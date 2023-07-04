@@ -32,7 +32,7 @@ export default function ContactUs() {
   };
 
   return (
-    <>
+    <div style={{ height: "80vh" }}>
       <h1>Contact Us</h1>
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -69,6 +69,6 @@ export default function ContactUs() {
         <button type="submit">Send Message</button>
       </form>
           
-    </>
+    </div>
   );
 }
