@@ -5,6 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Rating } from "@mui/material";
 
 export const Reviews = [
   {
@@ -49,6 +50,7 @@ export default function ReviewCard({ customerName, review, image }) {
           >
             {customerName}
           </Typography>
+          <Rating name="read-only" value={5} readOnly />
         </CardContent>
       </Box>
     </Card>
