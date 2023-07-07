@@ -30,7 +30,7 @@ function Products(props) {
       <h2>Products List</h2>
       <Grid container spacing={2}>
         {products.map((product, index) => (
-          <Grid item xs={4} key={product.id}>
+          <Grid item xs={3} key={product.id}>
             <Item>
               <ProductCard
                 price={product.price}
