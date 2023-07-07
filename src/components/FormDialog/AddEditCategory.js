@@ -34,7 +34,7 @@ const AddCategoryDialog = ({ open, onClose, onAddProduct }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Product</DialogTitle>
+      <DialogTitle>Add Category</DialogTitle>
       <DialogContent>
         <TextField
           label="Product Name"

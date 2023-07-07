@@ -25,7 +25,9 @@ export default function ProductCard({ price, name, description, image }) {
         <Button size="small" onClick={() => router.push("product-detail")}>
           Buy Now
         </Button>
-        <Button size="small">Contact Us</Button>
+        <Button size="small" onClick={() => router.push("contact-us")}>
+          Contact Us
+        </Button>
       </CardActions>
     </Card>
   );

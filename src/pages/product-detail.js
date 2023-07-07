@@ -44,9 +44,9 @@ const AddToCartButton = styled(Button)({
 function ProductDetailPage() {
   const product = {
     image: "images/1.jpg",
-    name: "Modern home in city center in the heart of historic Los Angeles",
+    name: "E-Bike 200",
     price: "$1,900.00",
-    features: "Spacious rooms, central location, modern amenities",
+    features: "Highly Reliable / 1000 KM Warranty",
   };
 
   const handleAddToCart = () => {
@@ -69,9 +69,7 @@ function ProductDetailPage() {
         <Price variant="h4" component="h2">
           {product.price}
         </Price>
-        <Subheading variant="subtitle1">
-          Spacious home with modern amenities
-        </Subheading>
+        <Subheading variant="subtitle1"></Subheading>
         <Features variant="h2" component="h2">
           Features
         </Features>
