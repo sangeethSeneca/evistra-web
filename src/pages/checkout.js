@@ -8,23 +8,34 @@ import {
   Button,
 } from "@mui/material";
 
-const ContactUsPage = () => {
+const CheckoutPage = () => {
   return (
-    <Container maxWidth="md" style={{ height: "80vh" }}>
-      <Typography variant="h6">For inquiries, Please Contact us</Typography>
-      <Paper sx={{ padding: 2, margin: "60px 0px" }}>
+    <Container maxWidth="md">
+      <Paper sx={{ padding: 2, marginBottom: 2 }}>
         <Typography variant="h6" gutterBottom>
-          Contact Us
+          Checkout
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField label="Name" fullWidth />
+            <TextField label="First Name" fullWidth />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="Last Name" fullWidth />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="Address" fullWidth />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="City" fullWidth />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="Zip Code" fullWidth />
           </Grid>
           <Grid item xs={12}>
             <TextField label="Email" fullWidth />
           </Grid>
           <Grid item xs={12}>
-            <TextField label="Message" multiline rows={4} fullWidth />
+            <TextField label="Phone Number" fullWidth />
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -33,7 +44,7 @@ const ContactUsPage = () => {
               fullWidth
               style={{ backgroundColor: "#3c6620" }}
             >
-              Submit
+              Place Order
             </Button>
           </Grid>
         </Grid>
@@ -42,4 +53,4 @@ const ContactUsPage = () => {
   );
 };
 
-export default ContactUsPage;
+export default CheckoutPage;

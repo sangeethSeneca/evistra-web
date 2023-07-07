@@ -102,11 +102,15 @@ const styles = {
   button: {
     fontSize: "20px",
     backgroundColor: "#3f7000",
+    borderRadius: "10px",
+    width: "300px",
   },
   SignUpButton: {
     marginTop: "5px",
     fontSize: "20px",
     textAlign: "center",
-    backgroundColor: "yellow",
+    backgroundColor: "#fae97d",
+    borderRadius: "10px",
+    width: "300px",
   },
 };

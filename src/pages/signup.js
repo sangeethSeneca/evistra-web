@@ -162,6 +162,8 @@ const styles = {
   },
   button: {
     fontSize: "20px",
-    backgroundColor: "#3f7000"
+    backgroundColor: "#3f7000",
+    borderRadius: "10px",
+    width: "300px",
   },
 };
