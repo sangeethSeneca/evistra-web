@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,16 +8,17 @@ import {
   TableRow,
   Paper,
   Typography,
+  Button,
 } from "@mui/material";
 
-const products = [
-  { id: 1, name: "Order 1", price: 10.99 },
-  { id: 2, name: "Order 2", price: 19.99 },
-  { id: 3, name: "Order 3", price: 5.99 },
-  { id: 4, name: "Order 4", price: 14.99 },
-];
-
 const OrderPage = () => {
+  const [orders, setOrders] = useState([
+    { id: 1, name: "Order 1", price: 10.99 },
+    { id: 2, name: "Order 2", price: 19.99 },
+    { id: 3, name: "Order 3", price: 5.99 },
+    { id: 4, name: "Order 4", price: 14.99 },
+  ]);
+
   return (
     <>
       <Typography variant="h4">{"Dashboard -> Orders"}</Typography>
@@ -31,7 +32,7 @@ const OrderPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product) => (
+            {orders.map((product) => (
               <TableRow key={product.id}>
                 <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
