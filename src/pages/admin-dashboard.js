@@ -11,8 +11,10 @@ import {
 import ProductPage from "../components/Dashboard/ProductPage";
 import OrderPage from "../components/Dashboard/OrdersPage";
 import CategoryPage from "../components/Dashboard/CategoryPage";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+  const router = useRouter();
   const [navItem, setNavItem] = useState("home");
   return (
     <Grid container spacing={2}>
@@ -25,7 +27,7 @@ const Dashboard = () => {
             Dashboard
           </Typography>
           <List>
-            <ListItem button onClick={() => setNavItem("home")}>
+            <ListItem button onClick={() => router.push("/")}>
               <ListItemText primary="Home" />
             </ListItem>
             <ListItem button>
