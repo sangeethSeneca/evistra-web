@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
       <CssBaseline />
       {!isDisabled && <Header />}
       <Component {...pageProps} />
-      <Footer />
+      {!isDisabled && <Footer />}
     </CacheProvider>
   );
 }

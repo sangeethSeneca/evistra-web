@@ -50,7 +50,11 @@ export default function Login() {
           </label>
         </div>
         <div style={styles.center}>
-          <button type="submit" style={styles.button}>
+          <button
+            type="submit"
+            onClick={() => router.push("/admin-dashboard")}
+            style={styles.button}
+          >
             Sign in
           </button>
         </div>
