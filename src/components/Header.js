@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 
 const Header = () => {
@@ -26,6 +26,9 @@ const Header = () => {
         </Button>
         <Button color="inherit" onClick={() => router.push("/contact-us")}>
           Contact
+        </Button>
+        <Button color="inherit" onClick={() => router.push("/checkout")}>
+          <img src="/images/cart.png" width="28px" height="28px" />
         </Button>
         <Button color="inherit" onClick={() => router.push("/login")}>
           Login
