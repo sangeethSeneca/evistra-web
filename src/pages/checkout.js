@@ -10,16 +10,14 @@ import {
 
 const CheckoutPage = () => {
   return (
-    <Container maxWidth="md">
+    <Container sx={{ width: "100%" }}>
       <Grid container spacing={2}>
         <Grid item xs={7}>
           Checkout
         </Grid>
-        <Grid item xs={5}>
-          <Paper sx={{ padding: 2, marginBottom: 2, width: "100%" }}>
-            <Typography variant="h6" gutterBottom>
-              Checkout
-            </Typography>
+        <Grid item xs={5} sx={{ width: "100%" }}>
+          <Paper sx={{ padding: 2, marginBottom: 2 }}>
+            <Typography variant="h6" gutterBottom></Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField label="First Name" fullWidth />
