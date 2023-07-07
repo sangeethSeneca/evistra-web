@@ -19,11 +19,7 @@ const Footer = () => {
         © {new Date().getFullYear()} Your Website. All rights reserved.
       </Typography>
       <Typography variant="body2" color="textSecondary">
-        <Link
-          href="https://www.example.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/" target="_blank" rel="noopener noreferrer">
           Evistra
         </Link>
       </Typography>
