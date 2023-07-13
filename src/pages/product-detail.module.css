@@ -166,12 +166,13 @@ const FeaturesContainer = styled("div")({
   placeItems: "center",
 });
 
-const Features = styled(Typography)({
+const Features = styled("ul")({
   position: "relative",
   fontSize: "14px",
   marginTop: -45,
   fontSize: "20px",
   whiteSpace: "pre-line",
+  listStyleType: "disc",
 });
 
 const AddToCartButton = styled(Button)(({ theme }) => ({
@@ -232,11 +233,12 @@ function ProductDetailPage() {
     numReviews: 5,
   };
 
-  const features = `- An LCD provides essential breakdowns of range, assist levels, and more.
-- Front and rear lighting allow riding from dusk till dawn.
-- Semi-integrated battery with multiple options, offering a maximum range of 150km (93 miles).
-- 500-watt rear-drive motor enables speeds of up to 32km/h (20mph) seamlessly paired with an 8-speed rear derailleur, cassette, chain, and shift lever.
-`;
+  const features = `
+  <li>An LCD provides essential breakdowns of range, assist levels, and more.</li>
+  <li>Front and rear lighting allow riding from dusk till dawn.</li>
+  <li>Semi-integrated battery with multiple options, offering a maximum range of 150km (93 miles).</li>
+  <li>500-watt rear-drive motor enables speeds of up to 32km/h (20mph) seamlessly paired with an 8-speed rear derailleur, cassette, chain, and shift lever.</li>
+  `;
 
   const handleAddToCart = () => {
     console.log("Product added to cart");
