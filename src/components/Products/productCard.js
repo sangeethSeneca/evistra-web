@@ -12,7 +12,13 @@ export default function ProductCard({ price, name, description, image }) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" alt="product" height="250px" image={image} />
+      <CardMedia
+        component="img"
+        alt="product"
+        width="250px"
+        height="250px"
+        image={image}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {price}

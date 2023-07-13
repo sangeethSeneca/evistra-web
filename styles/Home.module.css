@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .main {
@@ -51,10 +50,9 @@
   font-size: 4rem;
 }
 .caption {
-  line-height: 0.75,;
+  line-height: 0.75;
   font-size: 2rem;
 }
-
 
 .title,
 .description {
@@ -103,6 +101,23 @@
   border-color: #0070f3;
 }
 
+.brandNameContainer {
+  box-sizing: border-box;
+  color: rgb(0, 113, 133);
+  cursor: pointer;
+  display: inline;
+  font-family: "Amazon Ember", Arial, sans-serif;
+  font-size: 14px;
+  height: auto;
+  line-height: 20px;
+  text-decoration-color: rgb(0, 113, 133);
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  text-decoration-thickness: auto;
+  text-size-adjust: 100%;
+  width: auto;
+}
+
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
@@ -124,4 +139,9 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("../public/fonts/AmazonEmber_RgIt.ttf") format("truetype");
 }

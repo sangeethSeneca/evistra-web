@@ -14,14 +14,15 @@ const ProductDetailContainer = styled("div")({
   height: "105vh",
   placeItems: "center",
   justifySelf: "start",
-  marginTop: "-200px",
+  marginTop: "-175px",
+  marginBottom: "10px",
   marginLeft: "23.5%",
 });
 
 const ProductImageContainer = styled("div")({
-  display: "flex",
+  display: "absolute",
   justifyContent: "center",
-  marginTop: "0px",
+  marginTop: "-20px",
 });
 
 const ProductImage = styled("img")({
@@ -29,6 +30,18 @@ const ProductImage = styled("img")({
   maxWidth: "592px",
   height: "486px",
   justifySelf: "end",
+});
+
+const BrandNameContainer = styled("div")({
+  boxSizing: "content-box",
+  color: "rgb(0, 113, 133)",
+  display: "inline-flex",
+
+  fontFamily: "'Amazon Ember', Arial, sans-serif",
+  fontSize: "14px",
+  height: "auto",
+  lineHeight: "20px",
+  width: "auto",
 });
 
 const ProductName = styled(Typography)({
@@ -107,11 +120,6 @@ const ItemDescription = styled(Typography)({
   whiteSpace: "pre-line",
 });
 
-const Subheading = styled(Typography)({
-  fontSize: "14px",
-  marginTop: 8,
-});
-
 const ColorContainer = styled("div")({
   position: "relative",
   display: "flex",
@@ -161,14 +169,16 @@ const FeaturesContainer = styled("div")({
 const Features = styled(Typography)({
   position: "relative",
   fontSize: "14px",
-  marginTop: 0,
+  marginTop: -45,
+  fontSize: "20px",
   whiteSpace: "pre-line",
 });
 
 const AddToCartButton = styled(Button)(({ theme }) => ({
   color: "#fff",
   fontWeight: "bold",
-  marginTop: 16,
+  marginTop: 35,
+  marginBottom: -30,
   backgroundColor: "#59b147",
   borderColor: "#59b147",
   width: "300px",
@@ -181,10 +191,11 @@ const AddToCartButton = styled(Button)(({ theme }) => ({
 function ProductDetailPage() {
   const product = {
     image: "images/1.jpg",
+    brand: "NCC",
     name: "E-Bike 200",
     price: "$1,900.00",
     description:
-      "This high-performance electric bike is perfect for urban commuting and long rides. With its reliable motor and sturdy build, it offers a smooth and comfortable riding experience. Take your cycling to the next level with the E-Bike 200!",
+      "This high-performance electric bike is perfect for urban commuting and long rides. With its reliable motor and sturdy build, it offers a smooth and comfortable riding experience. Take your cycling to the next level with the E-Bike 200!\n",
     colorDesc: "Light Blue",
     rating: 5,
     numReviews: 5,
@@ -209,9 +220,11 @@ function ProductDetailPage() {
         <ProductName variant="h2" component="h1">
           {product.name}
         </ProductName>
+        <BrandNameContainer>Brand: {product.brand}</BrandNameContainer>
         <div>
           <Rating rating={product.rating} numReviews={product.numReviews} />
         </div>
+        <hr />
         <PriceContainer>
           <Price variant="h4" component="h2">
             {product.price}
@@ -222,18 +235,19 @@ function ProductDetailPage() {
           <ItemDescription variant="body1">
             {product.description}
           </ItemDescription>
-
-          <ColorContainer>
-            <ColorFeature>Color Name:</ColorFeature>
-            <ColorBox color="#0198a5" />
-          </ColorContainer>
+          <div>
+            <hr />
+            <ColorContainer>
+              <ColorFeature>Color Name:</ColorFeature>
+              <ColorBox color="#0198a5" />
+            </ColorContainer>
+          </div>
         </ItemDescriptionContainer>
-        <Subheading variant="subtitle1"></Subheading>
         <FeaturesContainer>
           <Features variant="h2" component="h2">
             Features
           </Features>
-          <Features variant="body1">{features}</Features>
+          <ItemDescription variant="body1">{features}</ItemDescription>
         </FeaturesContainer>
         <AddToCartButton variant="contained" onClick={handleAddToCart}>
           Add to Cart
