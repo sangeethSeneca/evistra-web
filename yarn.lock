@@ -9,10 +9,10 @@
   dependencies:
     "@babel/highlight" "^7.22.5"
 
-"@babel/generator@^7.22.5":
-  "integrity" "sha512-+lcUbnTRhd0jOewtFSedLyiPsD5tswKkbgcezOqqWFUVNEwoUTlpPOBmvhG7OXWLR4jMdv0czPGH5XbflnD1EA=="
-  "resolved" "https://registry.npmjs.org/@babel/generator/-/generator-7.22.5.tgz"
-  "version" "7.22.5"
+"@babel/generator@^7.22.7":
+  "integrity" "sha512-p+jPjMG+SI8yvIaxGgeW24u7q9+5+TGpZh8/CuB7RhBKd7RCy8FayNEFNNKrNK/eUcY/4ExQqLmyrvBXKsIcwQ=="
+  "resolved" "https://registry.npmjs.org/@babel/generator/-/generator-7.22.7.tgz"
+  "version" "7.22.7"
   dependencies:
     "@babel/types" "^7.22.5"
     "@jridgewell/gen-mapping" "^0.3.2"
@@ -58,10 +58,10 @@
   "resolved" "https://registry.npmjs.org/@babel/helper-plugin-utils/-/helper-plugin-utils-7.22.5.tgz"
   "version" "7.22.5"
 
-"@babel/helper-split-export-declaration@^7.22.5":
-  "integrity" "sha512-thqK5QFghPKWLhAV321lxF95yCg2K3Ob5yw+M3VHWfdia0IkPXUtoLH8x/6Fh486QUvzhb8YOWHChTVen2/PoQ=="
-  "resolved" "https://registry.npmjs.org/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.22.5.tgz"
-  "version" "7.22.5"
+"@babel/helper-split-export-declaration@^7.22.6":
+  "integrity" "sha512-AsUnxuLhRYsisFiaJwvp1QF+I3KjD5FOxut14q/GzovUe6orHLesW2C7d754kRm53h5gqrz6sFl6sxc4BVtE/g=="
+  "resolved" "https://registry.npmjs.org/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.22.6.tgz"
+  "version" "7.22.6"
   dependencies:
     "@babel/types" "^7.22.5"
 
@@ -84,10 +84,10 @@
     "chalk" "^2.0.0"
     "js-tokens" "^4.0.0"
 
-"@babel/parser@^7.22.5":
-  "integrity" "sha512-DFZMC9LJUG9PLOclRC32G63UXwzqS2koQC8dkx+PLdmt1xSePYpbT/NbsrJy8Q/muXz7o/h/d4A7Fuyixm559Q=="
-  "resolved" "https://registry.npmjs.org/@babel/parser/-/parser-7.22.5.tgz"
-  "version" "7.22.5"
+"@babel/parser@^7.22.5", "@babel/parser@^7.22.7":
+  "integrity" "sha512-7NF8pOkHP5o2vpmGgNGcfAeCvOYhGLyA3Z4eBQkT1RJlWu47n63bCs93QfJ2hIAFCil7L5P2IWhs1oToVgrL0Q=="
+  "resolved" "https://registry.npmjs.org/@babel/parser/-/parser-7.22.7.tgz"
+  "version" "7.22.7"
 
 "@babel/plugin-syntax-jsx@^7.22.5":
   "integrity" "sha512-gvyP4hZrgrs/wWMaocvxZ44Hw0b3W8Pe+cMxc8V1ULQ07oh8VNbIRaoD1LRZVTvD+0nieDKjfgKg89sD7rrKrg=="
@@ -113,17 +113,17 @@
     "@babel/types" "^7.22.5"
 
 "@babel/traverse@^7.4.5":
-  "integrity" "sha512-7DuIjPgERaNo6r+PZwItpjCZEa5vyw4eJGufeLxrPdBXBoLcCJCIasvK6pK/9DVNrLZTLFhUGqaC6X/PA007TQ=="
-  "resolved" "https://registry.npmjs.org/@babel/traverse/-/traverse-7.22.5.tgz"
-  "version" "7.22.5"
+  "integrity" "sha512-y6LPR+wpM2I3qJrsheCTwhIinzkETbplIgPBbwvqPKc+uljeA5gP+3nP8irdYt1mjQaDnlIcG+dw8OjAco4GXw=="
+  "resolved" "https://registry.npmjs.org/@babel/traverse/-/traverse-7.22.8.tgz"
+  "version" "7.22.8"
   dependencies:
     "@babel/code-frame" "^7.22.5"
-    "@babel/generator" "^7.22.5"
+    "@babel/generator" "^7.22.7"
     "@babel/helper-environment-visitor" "^7.22.5"
     "@babel/helper-function-name" "^7.22.5"
     "@babel/helper-hoist-variables" "^7.22.5"
-    "@babel/helper-split-export-declaration" "^7.22.5"
-    "@babel/parser" "^7.22.5"
+    "@babel/helper-split-export-declaration" "^7.22.6"
+    "@babel/parser" "^7.22.7"
     "@babel/types" "^7.22.5"
     "debug" "^4.1.0"
     "globals" "^11.1.0"
