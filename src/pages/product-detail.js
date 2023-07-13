@@ -1,79 +1,240 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 
 const ProductDetailContainer = styled("div")({
-  alignItems: "center",
-  height: "80vh",
-  width: "100%",
   display: "flex",
+  alignItems: "center",
+  overflowY: "auto",
+  overflowX: "auto",
+  height: "105vh",
+  placeItems: "center",
+  justifySelf: "start",
+  marginTop: "-200px",
+  marginLeft: "23.5%",
+});
+
+const ProductImageContainer = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "0px",
 });
 
 const ProductImage = styled("img")({
-  marginRight: 16,
+  boxSizing: "border-box",
+  maxWidth: "592px",
+  height: "486px",
+  justifySelf: "end",
 });
 
 const ProductName = styled(Typography)({
   textTransform: "uppercase",
-  fontWeight: "bold",
+  fontWeight: "bolder",
   fontSize: "1.5rem",
+  marginTop: "-30px",
+});
+
+const PriceContainer = styled("div")({
+  display: "flex",
+  alignItems: "center",
 });
 
 const Price = styled(Typography)({
-  color: "orange",
+  color: "#59b147",
+  fontWeight: "bold",
   fontSize: "1.25rem",
+  marginRight: "8px",
+  marginTop: 9,
+});
+
+const TaxText = styled(Typography)({
+  fontSize: "0.8rem",
+  marginBottom: -11,
+  color: "#ba170b",
+});
+
+const Rating = ({ rating, numReviews }) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating - fullStars >= 0.5;
+
+  return (
+    <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center" marginRight={1}>
+        {Array(5)
+          .fill()
+          .map((_, index) =>
+            index < fullStars ? (
+              <StarIcon
+                key={index}
+                htmlColor="gold"
+                style={{ fontSize: "15px" }}
+              />
+            ) : (
+              <StarBorderIcon
+                key={index}
+                htmlColor="gold"
+                style={{ fontSize: "15px" }}
+              />
+            )
+          )}
+        {hasHalfStar && <StarIcon htmlColor="gold" />}
+      </Box>
+      <Typography variant="body2">{`${numReviews} reviews`}</Typography>
+    </Box>
+  );
+};
+
+const ItemDescriptionContainer = styled("div")({
+  width: 421,
+  height: 200,
+  overflow: "hidden",
+  fontFamily: "Oswald, Helvetica, sans-serif",
+  whiteSpace: "pre-line",
+  marginTop: "10px",
+  position: "relative",
+  top: -9,
+});
+
+const ItemDescription = styled(Typography)({
+  fontSize: "14px",
+  lineHeight: "20px",
+  fontFamily: "Oswald, Helvetica, sans-serif",
+  marginTop: 10,
+  whiteSpace: "pre-line",
 });
 
 const Subheading = styled(Typography)({
-  fontSize: "1.2rem",
+  fontSize: "14px",
   marginTop: 8,
 });
 
-const Features = styled(Typography)({
-  fontSize: "1.5rem",
-  marginTop: 16,
+const ColorContainer = styled("div")({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  marginTop: "10px",
 });
 
-const AddToCartButton = styled(Button)({
-  color: "orange",
+const ColorFeature = styled(Typography)({
+  color: "rgb(15, 17, 17)",
+  cursor: "default",
+  display: "inline",
+  fontFamily: "'Amazon Ember', Arial, sans-serif",
+  fontSize: "16px",
+  fontWeight: 700,
+  height: "auto",
+  lineHeight: "20px",
+  paddingBottom: "2px",
+  paddingLeft: "2px",
+  textSizeAdjust: "100%",
+  position: "relative",
+  top: 6,
+});
+
+const ColorBox = styled("div")(({ color }) => ({
+  width: 25,
+  height: 25,
+  backgroundColor: color,
+  borderColor: "#000000",
+  marginRight: 8,
+  position: "absolute",
+  top: "34px",
+  left: "0px",
+}));
+
+const FeaturesContainer = styled("div")({
+  width: 400,
+  height: 300,
+  position: "relative",
+  marginTop: "20px",
+  alignItems: "center",
+  overflowY: "visible",
+  overflowX: "visible",
+  height: "20vh",
+  placeItems: "center",
+});
+
+const Features = styled(Typography)({
+  position: "relative",
+  fontSize: "14px",
+  marginTop: 0,
+  whiteSpace: "pre-line",
+});
+
+const AddToCartButton = styled(Button)(({ theme }) => ({
+  color: "#fff",
   fontWeight: "bold",
   marginTop: 16,
-});
+  backgroundColor: "#59b147",
+  borderColor: "#59b147",
+  width: "300px",
+  "&:hover": {
+    backgroundColor: "#59b147",
+    borderColor: "#59b147",
+  },
+}));
 
 function ProductDetailPage() {
   const product = {
     image: "images/1.jpg",
     name: "E-Bike 200",
     price: "$1,900.00",
-    features: "Highly Reliable / 1000 KM Warranty",
+    description:
+      "This high-performance electric bike is perfect for urban commuting and long rides. With its reliable motor and sturdy build, it offers a smooth and comfortable riding experience. Take your cycling to the next level with the E-Bike 200!",
+    colorDesc: "Light Blue",
+    rating: 5,
+    numReviews: 5,
   };
 
+  const features = `- An LCD provides essential breakdowns of range, assist levels, and more.
+- Front and rear lighting allow riding from dusk till dawn.
+- Semi-integrated battery with multiple options, offering a maximum range of 150km (93 miles).
+- 500-watt rear-drive motor enables speeds of up to 32km/h (20mph) seamlessly paired with an 8-speed rear derailleur, cassette, chain, and shift lever.
+`;
+
   const handleAddToCart = () => {
-    // Functionality to handle adding the product to the cart
     console.log("Product added to cart");
   };
 
   return (
     <ProductDetailContainer>
-      <ProductImage
-        src={product.image}
-        width={400}
-        height={600}
-        alt="Product"
-      />
+      <ProductImageContainer>
+        <ProductImage src={product.image} alt="Product" />
+      </ProductImageContainer>
       <div>
         <ProductName variant="h2" component="h1">
           {product.name}
         </ProductName>
-        <Price variant="h4" component="h2">
-          {product.price}
-        </Price>
+        <div>
+          <Rating rating={product.rating} numReviews={product.numReviews} />
+        </div>
+        <PriceContainer>
+          <Price variant="h4" component="h2">
+            {product.price}
+          </Price>
+          <TaxText variant="body2">Excl Tax</TaxText>
+        </PriceContainer>
+        <ItemDescriptionContainer>
+          <ItemDescription variant="body1">
+            {product.description}
+          </ItemDescription>
+
+          <ColorContainer>
+            <ColorFeature>Color Name:</ColorFeature>
+            <ColorBox color="#0198a5" />
+          </ColorContainer>
+        </ItemDescriptionContainer>
         <Subheading variant="subtitle1"></Subheading>
-        <Features variant="h2" component="h2">
-          Features
-        </Features>
-        <Typography variant="body1">{product.features}</Typography>
+        <FeaturesContainer>
+          <Features variant="h2" component="h2">
+            Features
+          </Features>
+          <Features variant="body1">{features}</Features>
+        </FeaturesContainer>
         <AddToCartButton variant="contained" onClick={handleAddToCart}>
           Add to Cart
         </AddToCartButton>
