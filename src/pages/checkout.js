@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grid,
@@ -12,17 +12,108 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const Checkout = () => {
-  const cartItems = [
-    { id: 1, name: "E-Bike Model 1", price: 1999.99, quantity: 1 },
-    { id: 2, name: "E-Bike Model 2", price: 2499.99, quantity: 2 },
-  ];
+  const [cartItems, setCartItems] = useState([
+    {
+      id: 1,
+      name: "A99-2C0",
+      price: 266.25,
+      quantity: 1,
+      image: "/images/1.jpg",
+    },
+    {
+      id: 2,
+      name: "E-BIKE200-2",
+      price: 356.25,
+      quantity: 2,
+      image: "/images/2.jpg",
+    },
+    {
+      id: 3,
+      name: "A-200",
+      price: 256.25,
+      quantity: 1,
+      image: "/images/3.jpg",
+    },
+    {
+      id: 4,
+      name: "X-BIKE200",
+      price: 216.25,
+      quantity: 1,
+      image: "/images/4.jpg",
+    },
+  ]);
+
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleRemoveItem = (itemId) => {
-    // Remove item logic
+    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    setCartItems(updatedCartItems);
+  };
+
+  const handleIncreaseQuantity = (itemId) => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  };
+
+  const handleDecreaseQuantity = (itemId) => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === itemId && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setCartItems(updatedCartItems);
+  };
+
+  const calculateItemTotal = (item) => {
+    return (item.price * item.quantity).toFixed(2);
+  };
+
+  const calculateSubtotal = () => {
+    let subtotal = 0;
+    cartItems.forEach((item) => {
+      subtotal += item.price * item.quantity;
+    });
+    return subtotal.toFixed(2);
+  };
+
+  const calculateSavings = () => {
+    let savings = 0;
+    cartItems.forEach((item) => {
+      const originalPrice = item.price * item.quantity;
+      const discountedPrice = originalPrice * 0.1; // 10% discount
+      savings += discountedPrice;
+    });
+    return savings.toFixed(2);
+  };
+
+  const calculateTotal = () => {
+    const subtotal = parseFloat(calculateSubtotal());
+    const savings = parseFloat(calculateSavings());
+    return (subtotal - savings).toFixed(2);
+  };
+
+  const handleProceedToCheckout = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -39,17 +130,40 @@ const Checkout = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Product</TableCell>
-                  <TableCell>Price</TableCell>
+                  <TableCell>Unit Price</TableCell>
                   <TableCell>Quantity</TableCell>
+                  <TableCell>Total Price</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {cartItems.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell>{item.name}</TableCell>
+                    <TableCell>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        style={{ height: "50px" }}
+                      />
+                      <Typography>{item.name}</Typography>
+                    </TableCell>
                     <TableCell>${item.price}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        aria-label="decrease"
+                        onClick={() => handleDecreaseQuantity(item.id)}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      {item.quantity}
+                      <IconButton
+                        aria-label="increase"
+                        onClick={() => handleIncreaseQuantity(item.id)}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>${calculateItemTotal(item)}</TableCell>
                     <TableCell>
                       <IconButton
                         aria-label="delete"
@@ -65,11 +179,36 @@ const Checkout = () => {
           </TableContainer>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleProceedToCheckout}
+          >
             Proceed to Checkout
           </Button>
         </Grid>
       </Grid>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Order Summary</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Shipping: {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
+          </Typography>
+          <Typography>Subtotal: ${calculateSubtotal()}</Typography>
+          <Typography>My Savings: ${calculateSavings()}</Typography>
+          <Typography>
+            Total before tax &amp; shipping: ${calculateTotal()}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+          <Button onClick={handleCloseDialog} color="primary" variant="contained">
+            Checkout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
