@@ -11,13 +11,10 @@ import {
 const ContactUsPage = () => {
   return (
     <Container maxWidth="md" style={{ height: "80vh" }}>
-      <Typography variant="h6" style={{ marginTop: "40px"}}>
+      <Typography variant="h6" style={{ marginTop: "40px", fontWeight: "bold"}}>
         For inquiries, Please Contact us
       </Typography>
       <Paper sx={{ padding: 2, margin: "20px 0px" }}>
-        <Typography variant="h6" gutterBottom>
-          Contact Us
-        </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField label="Name" fullWidth />
