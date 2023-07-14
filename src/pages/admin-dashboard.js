@@ -26,6 +26,12 @@ const Dashboard = () => {
           <Typography variant="h5" gutterBottom>
             Dashboard
           </Typography>
+          <img
+            src="/images/logo.png"
+            width="100px"
+            height="100px"
+            style={{ padding: "5px" }}
+          />
           <List>
             <ListItem button onClick={() => router.push("/")}>
               <ListItemText primary="Home" />

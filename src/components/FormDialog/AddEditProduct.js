@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const AddProductDialog = ({ open, onClose, onAddProduct }) => {
+const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productCode, setProductCode] = useState("");
@@ -39,7 +39,9 @@ const AddProductDialog = ({ open, onClose, onAddProduct }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Product</DialogTitle>
+      <DialogTitle sx={{ backgroundColor: "#3c6620", color: "#FFF" }}>
+        {title} Product
+      </DialogTitle>
       <DialogContent>
         <TextField
           label="Product Code"
@@ -64,11 +66,17 @@ const AddProductDialog = ({ open, onClose, onAddProduct }) => {
           fullWidth
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+      <DialogActions
+        sx={{ backgroundColor: "#e1e8e5", color: "#FFF !important" }}
+      >
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
         <Button
           onClick={handleAddProduct}
           disabled={!productName || !productPrice}
+          variant="contained"
+          color="success"
         >
           Add
         </Button>

@@ -9,11 +9,15 @@ import {
   Paper,
   Typography,
   Button,
+  IconButton,
 } from "@mui/material";
 import AddProductDialog from "../FormDialog/AddEditProduct";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProductPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
+
   const [products, setProducts] = useState([
     { code: 1, name: "Product 1", price: 10.99 },
     { code: 2, name: "Product 2", price: 19.99 },
@@ -27,14 +31,22 @@ const ProductPage = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setSelectedProduct(null);
   };
 
   const handleAddProduct = (newProduct) => {
     setProducts([...products, newProduct]);
+    setSelectedProduct(null);
   };
+
+  const handleEdit = (category) => {
+    setSelectedProduct(category);
+    setOpenDialog(true);
+  };
+
   return (
     <>
-      <Typography variant="h4">{"Dashboard -> Products"}</Typography>
+      <Typography variant="h4">{"Products"}</Typography>
       <Button
         variant="outlined"
         sx={{ border: "2px solid #3c6620 ", color: "#3c6620" }}
@@ -57,6 +69,11 @@ const ProductPage = () => {
                 <TableCell>{product.code}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEdit(product)}>
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -66,6 +83,9 @@ const ProductPage = () => {
         open={openDialog}
         onClose={handleCloseDialog}
         onAddProduct={handleAddProduct}
+        setSelectedProduct={setSelectedProduct}
+        selectedProduct={selectedProduct}
+        title={selectedProduct ? "Edit" : "Add"}
       />
     </>
   );
