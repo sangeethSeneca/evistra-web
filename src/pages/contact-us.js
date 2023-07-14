@@ -11,8 +11,10 @@ import {
 const ContactUsPage = () => {
   return (
     <Container maxWidth="md" style={{ height: "80vh" }}>
-      <Typography variant="h6">For inquiries, Please Contact us</Typography>
-      <Paper sx={{ padding: 2, margin: "60px 0px" }}>
+      <Typography variant="h6" style={{ marginTop: "40px"}}>
+        For inquiries, Please Contact us
+      </Typography>
+      <Paper sx={{ padding: 2, margin: "20px 0px" }}>
         <Typography variant="h6" gutterBottom>
           Contact Us
         </Typography>

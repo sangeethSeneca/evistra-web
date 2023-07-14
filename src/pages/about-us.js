@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AboutUs() {
+const AboutUs = () => {
   return (
     <div style={styles.container}>
       {/* <h1>About Us</h1> */}
@@ -50,3 +50,6 @@ const styles = {
     display: "flex",
   },
 };
+
+
+export default AboutUs;
