@@ -32,13 +32,22 @@ export default function ReviewCard({ customerName, review, image }) {
     <Card
       sx={{
         display: "flex",
+        position: "flex",
         backgroundColor: "#3c6620",
         color: "#FFFF",
         margin: "5px",
+
+        alignItems: "center",
         borderRadius: "22px",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "30%",
+        }}
+      >
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h5">
             {review}

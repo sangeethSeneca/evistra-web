@@ -9,8 +9,8 @@ export default function Home() {
     "images/image1.jpg",
     "images/image2.jpg",
     "images/image3.jpg",
-    // Add more image URLs as needed
   ];
+
   return (
     <>
       <ImageSlider />
@@ -18,7 +18,7 @@ export default function Home() {
         <div
           style={{
             float: "left",
-            width: "70%",
+            width: "1200px",
             height: "40vh",
             alignContent: "center",
           }}
@@ -26,7 +26,7 @@ export default function Home() {
           <h2 style={{ textAlign: "center" }}>Collection Gallery</h2>
           <Gallery />
         </div>
-        <div style={{ float: "right", width: "30%" }}>
+        <div style={{ float: "right", width: "600px", height: "660px" }}>
           <h2 style={{ textAlign: "center" }}>Customer Reviews</h2>
           {Reviews.map((review) => (
             <ReviewCard
