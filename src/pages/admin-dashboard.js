@@ -56,6 +56,18 @@ const Dashboard = () => {
               />
             </ListItem>
             <ListItem button>
+              <ListItemText
+                primary="Customers"
+                onClick={() => setNavItem("customers")}
+              />
+            </ListItem>
+            <ListItem button>
+              <ListItemText
+                primary="Users"
+                onClick={() => setNavItem("users")}
+              />
+            </ListItem>
+            <ListItem button>
               <ListItemText primary="Settings" />
             </ListItem>
           </List>

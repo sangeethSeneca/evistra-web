@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { products } from "../components/Products/data";
 import ProductCard from "../components/Products/productCard";
@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -16,6 +17,22 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Products(props) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://creepy-calf-gaiters.cyclic.app/products"
+        );
+        setData(response.data.products);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const bgImage = {
     imageUrl: "./images/bg.jpeg",
     beds: 3,
@@ -29,7 +46,7 @@ function Products(props) {
     <>
       <h2>Products List</h2>
       <Grid container spacing={2}>
-        {products.map((product, index) => (
+        {data.map((product, index) => (
           <Grid item xs={3} key={product.id}>
             <Item>
               <ProductCard
