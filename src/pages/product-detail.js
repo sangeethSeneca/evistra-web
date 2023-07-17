@@ -10,13 +10,11 @@ const ProductDetailContainer = styled("div")({
   display: "flex",
   alignItems: "center",
   overflowY: "auto",
-  overflowX: "auto",
-  height: "105vh",
+  height: "95vh",
   placeItems: "center",
   justifySelf: "start",
-  marginTop: "-175px",
   marginBottom: "10px",
-  marginLeft: "23.5%",
+  margin: "auto",
 });
 
 const ProductImageContainer = styled("div")({
@@ -27,8 +25,8 @@ const ProductImageContainer = styled("div")({
 
 const ProductImage = styled("img")({
   boxSizing: "border-box",
-  maxWidth: "592px",
-  height: "486px",
+ marginTop:"20px",
+  height: "300px",
   justifySelf: "end",
 });
 
@@ -177,8 +175,7 @@ const Features = styled(Typography)({
 const AddToCartButton = styled(Button)(({ theme }) => ({
   color: "#fff",
   fontWeight: "bold",
-  marginTop: 35,
-  marginBottom: -30,
+  marginTop: 50,
   backgroundColor: "#59b147",
   borderColor: "#59b147",
   width: "300px",
@@ -245,6 +242,7 @@ function ProductDetailPage() {
   return (
     <div>
       <ProductDetailContainer>
+        <div style={{margin:'auto', display:"flex"}}>
         <ProductImageContainer>
           <ProductImage src={product.image} alt="Product" />
         </ProductImageContainer>
@@ -285,18 +283,10 @@ function ProductDetailPage() {
             Add to Cart
           </AddToCartButton>
         </div>
+        </div>
       </ProductDetailContainer>
 
-      <ProductKFContainer>
-        <ProductKFTitle variant="h2" component="h2">
-          Product Description
-        </ProductKFTitle>
-        <ProductKFText variant="body1">
-          Height: {product.height}
-          <br />
-          Width: {product.width}
-        </ProductKFText>
-      </ProductKFContainer>
+     
     </div>
   );
 }
