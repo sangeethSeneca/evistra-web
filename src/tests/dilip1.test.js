@@ -61,7 +61,6 @@ describe("Signup component", () => {
 
   });
 
-
   test("Valid Email Address", () => {
     const { getByPlaceholderText } = render(< Signup />);
 
@@ -86,7 +85,6 @@ describe("Signup component", () => {
     expect(emailInput.value).toBe("");
 
   });
-
 
   test("Valid Phone Number", () => {
     const { getByPlaceholderText } = render(< Signup />);
@@ -144,7 +142,6 @@ describe("Signup component", () => {
     expect(passwordInput.value).toBe("");
   });
 
-
   test("Password: Length Less than 8 Characters test", () => {
     const { getByPlaceholderText } = render(< Signup />);
 
@@ -152,7 +149,6 @@ describe("Signup component", () => {
     fireEvent.change(passwordInput, { target: { value: "pass" } });
     expect(passwordInput.value).toBe("");
   });
-
 
   test("Password: Starts with Space test", () => {
     const { getByPlaceholderText } = render(< Signup />);
@@ -162,7 +158,6 @@ describe("Signup component", () => {
     expect(passwordInput.value).toBe("");
   });
 
-
   test("Password: Without Upper Case Letter", () => {
     const { getByPlaceholderText } = render(< Signup />);
 
@@ -170,7 +165,6 @@ describe("Signup component", () => {
     fireEvent.change(passwordInput, { target: { value: "password!123" } });
     expect(passwordInput.value).toBe("");
   });
-
 
   test("Valid Confirm Password", () => {
     const { getByPlaceholderText } = render(< Signup />);
@@ -180,7 +174,6 @@ describe("Signup component", () => {
     expect(confirmPasswordInput.value).toBe("Password!123");
   });
 
-
   test("Confirm Password: Test for Starts with Space", () => {
     const { getByPlaceholderText } = render(< Signup />);
 
@@ -188,7 +181,6 @@ describe("Signup component", () => {
     fireEvent.change(confirmPasswordInput, { target: { value: " Password!123" } });
     expect(confirmPasswordInput.value).toBe(" Password!123");
   });
-
 
   test("Confirm Password: Test for Space Except Beginning and End", () => {
     const { getByPlaceholderText } = render(< Signup />);

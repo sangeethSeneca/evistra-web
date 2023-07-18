@@ -46,7 +46,6 @@ describe("ContactUsPage", () => {
     expect(nameField.value).toMatch(invalidCharacters);
   });
 
-
   test("Contact-us page unit test: Test for blank Email field", () => {
     render(<ContactUsPage />);
     const emailField = screen.getByLabelText("Email");
@@ -87,14 +86,11 @@ describe("ContactUsPage", () => {
     });
   });
 
-
-
   test("Contact-us page unit test: Test for blank Message field", () => {
     render(<ContactUsPage />);
     const messageField = screen.getByLabelText("Message");
     expect(messageField.value).toBe("");
   });
-
 
   test("Contact-us page unit test: Test for submit button", () => {
     render(<ContactUsPage />);
