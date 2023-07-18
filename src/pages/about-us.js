@@ -29,6 +29,7 @@ const AboutUs = () => {
 const styles = {
   container: {
     margin: "40px", // Adds 40px right and left spacing
+    height:"85vh"
   },
   imageContainer: {
     display: "flex",

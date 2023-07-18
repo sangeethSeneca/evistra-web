@@ -9,26 +9,41 @@ import {
   Paper,
   Typography,
   Button,
+  IconButton,
 } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import OrderDetailDialog from "../FormDialog/OrderDetail";
 
 const OrderPage = () => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
   const [orders, setOrders] = useState([
-    { id: 1, name: "Order 1", price: 10.99 },
-    { id: 2, name: "Order 2", price: 19.99 },
-    { id: 3, name: "Order 3", price: 5.99 },
-    { id: 4, name: "Order 4", price: 14.99 },
+    { id: 1, name: "David Silva", price: 10.99, state: "New" },
+    { id: 2, name: "Leo Dia", price: 19.99, state: "New" },
+    { id: 3, name: "Marco Silva", price: 5.99, state: "Confirmed" },
+    { id: 4, name: "Julia Perera", price: 14.99, state: "Delivered" },
   ]);
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <>
-      <Typography variant="h4">{"Dashboard -> Orders"}</Typography>
+      <Typography variant="h4">{"Orders"}</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell>Customer Name</TableCell>
               <TableCell>Price</TableCell>
+              <TableCell>State</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -37,10 +52,23 @@ const OrderPage = () => {
                 <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
+                <TableCell>{product.state}</TableCell>
+                <TableCell>
+                  <IconButton onClick={handleOpenDialog}>
+                    <VisibilityIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        <OrderDetailDialog
+          open={openDialog}
+          onClose={handleCloseDialog}
+          onAddProduct={handleOpenDialog}
+          selectedOrder={selectedOrder}
+          setSelectedOrder={setSelectedOrder}
+        />
       </TableContainer>
     </>
   );

@@ -9,11 +9,14 @@ import {
   Paper,
   Typography,
   Button,
+  IconButton,
 } from "@mui/material";
 import AddCategoryDialog from "../FormDialog/AddEditCategory";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CategoryPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState({});
   const [categories, setCategories] = useState([
     { code: 1, name: "Category 1" },
     { code: 2, name: "Category 2" },
@@ -27,14 +30,22 @@ const CategoryPage = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setSelectedCategory(null);
   };
 
   const handleAddCategory = (newProduct) => {
     setCategories([...categories, newProduct]);
+    setSelectedCategory(null);
   };
+
+  const handleEdit = (category) => {
+    setSelectedCategory(category);
+    setOpenDialog(true);
+  };
+
   return (
     <>
-      <Typography variant="h4">{"Dashboard -> Categories"}</Typography>
+      <Typography variant="h4">{"Categories"}</Typography>
       <Button
         variant="outlined"
         sx={{ border: "2px solid #3c6620 ", color: "#3c6620" }}
@@ -46,15 +57,20 @@ const CategoryPage = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell>Code</TableCell>
               <TableCell>Name</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {categories.map((product) => (
-              <TableRow key={product.code}>
-                <TableCell>{product.code}</TableCell>
-                <TableCell>{product.name}</TableCell>
+            {categories.map((category) => (
+              <TableRow key={category.code}>
+                <TableCell>{category.code}</TableCell>
+                <TableCell>{category.name}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEdit(category)}>
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -64,6 +80,9 @@ const CategoryPage = () => {
         open={openDialog}
         onClose={handleCloseDialog}
         onAddProduct={handleAddCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+        title={selectedCategory ? "Edit" : "Add"}
       />
     </>
   );

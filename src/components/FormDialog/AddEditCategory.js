@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const AddCategoryDialog = ({ open, onClose, onAddProduct }) => {
+const AddCategoryDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
   const [categoryCode, setCategoryCode] = useState("");
   const [categoryName, setCategoryName] = useState("");
 
@@ -34,17 +34,19 @@ const AddCategoryDialog = ({ open, onClose, onAddProduct }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Category</DialogTitle>
+      <DialogTitle sx={{ backgroundColor: "#3c6620", color: "#FFF" }}>
+        {title} Category
+      </DialogTitle>
       <DialogContent>
         <TextField
-          label="Product Name"
+          label="Category Code"
           value={categoryCode}
           onChange={handleCategoryCodeChange}
           fullWidth
           sx={{ margin: "10px auto" }}
         />
         <TextField
-          label="Product Price"
+          label="Category Name"
           type="number"
           value={categoryName}
           onChange={handleCategoryNameChange}
@@ -52,11 +54,18 @@ const AddCategoryDialog = ({ open, onClose, onAddProduct }) => {
           fullWidth
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+      <DialogActions
+        sx={{ backgroundColor: "#e1e8e5", color: "#FFF !important" }}
+      >
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
         <Button
+          variant="outlined"
           onClick={handleAddCategory}
           disabled={!categoryCode || !categoryName}
+          variant="contained"
+          color="success"
         >
           Add
         </Button>
