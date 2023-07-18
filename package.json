@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "peerDependencies": {
     "react": "18.2.0",
@@ -21,6 +22,7 @@
     "@mui/material": "^5.14.0",
     "@mui/styles": "^5.13.2",
     "framer-motion": "^4",
+    "jest-dom": "^4.0.0",
     "next": "^13.4.7",
     "react": "18.2.0",
     "react-alice-carousel": "^2.5.1",
@@ -30,5 +32,17 @@
     "react-reveal": "^1.2.2",
     "react-scroll": "^1.8.2",
     "styled-components": "^5.3.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "babel-jest": "^29.6.1",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

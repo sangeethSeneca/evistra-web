@@ -9,27 +9,49 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z ]*$/.test(value)) {
+      setFirstName(value);
+    }
   };
 
   const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
+    const value = e.target.value;
+    if (/^[a-zA-Z ]*$/.test(value)) {
+      setLastName(value);
+    }
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const value = e.target.value;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (emailRegex.test(value) || value === "") {
+      setEmail(value);
+    }
   };
 
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
+    const value = e.target.value;
+    const numbersOnlyRegex = /^[0-9]*$/;
+    if (numbersOnlyRegex.test(value) || value === "") {
+      setPhone(value);
+    }
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const value = e.target.value;
+    const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z])(?!^\s).{8,}$/;
+    if (passwordRegex.test(value) || value === "") {
+      setPassword(value);
+    }
   };
 
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
+    const value = e.target.value;
+    const confirmPasswordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z]).{8,}$/;
+    if (confirmPasswordRegex.test(value) || value === "") {
+      setConfirmPassword(value);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -42,6 +64,10 @@ function Signup() {
     console.log("Phone:", phone);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
+
+    if (onSubmit) {
+      onSubmit();
+    }
   };
 
   return (
