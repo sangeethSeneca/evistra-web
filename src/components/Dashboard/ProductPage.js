@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,18 +13,28 @@ import {
 } from "@mui/material";
 import AddProductDialog from "../FormDialog/AddEditProduct";
 import EditIcon from "@mui/icons-material/Edit";
+import axios from "axios";
 
 const ProductPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
 
-  const [products, setProducts] = useState([
-    { code: 1, name: "Product 1", price: 10.99 },
-    { code: 2, name: "Product 2", price: 19.99 },
-    { code: 3, name: "Product 3", price: 5.99 },
-    { code: 4, name: "Product 4", price: 14.99 },
-  ]);
+  const [products, setProducts] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://creepy-calf-gaiters.cyclic.app/products"
+        );
+        setProducts(response.data.products);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -58,15 +68,15 @@ const ProductPage = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Product Code</TableCell>
-              <TableCell>Product Name</TableCell>
+              <TableCell>Model Number</TableCell>
+              <TableCell>Model Name</TableCell>
               <TableCell>Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.code}>
-                <TableCell>{product.code}</TableCell>
+                <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>

@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import axios from "axios";
 
 const AddCategoryDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
   const [categoryCode, setCategoryCode] = useState("");
