@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,17 +13,28 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import OrderDetailDialog from "../FormDialog/OrderDetail";
+import axios from "axios";
 
 const OrderPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const [orders, setOrders] = useState([
-    { id: 1, name: "David Silva", price: 10.99, state: "New" },
-    { id: 2, name: "Leo Dia", price: 19.99, state: "New" },
-    { id: 3, name: "Marco Silva", price: 5.99, state: "Confirmed" },
-    { id: 4, name: "Julia Perera", price: 14.99, state: "Delivered" },
-  ]);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://creepy-calf-gaiters.cyclic.app/orders"
+        );
+        setOrders(response.data.orders);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
