@@ -4,7 +4,7 @@ export const calculateItemTotal = (item) => {
 
 export const calculateSubtotal = (cartItems) => {
     let subtotal = 0;
-    let items = [cartItems];
+    let items = [...cartItems];
     items.forEach((item) => {
         subtotal += item?.price * item?.quantity;
     });
@@ -14,7 +14,7 @@ export const calculateSubtotal = (cartItems) => {
 
 export const calculateSavings = (cartItems) => {
     let savings = 0;
-    let items = [cartItems];
+    let items = [...cartItems];
     items.forEach((item) => {
         const originalPrice = item?.price * item?.quantity;
         const discountedPrice = originalPrice * 0.1; // 10% discount

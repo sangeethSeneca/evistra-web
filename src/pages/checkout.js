@@ -86,7 +86,7 @@ const Checkout = () => {
 
 
   const calculateTotal = () => {
-    const subtotal = parseFloat(calculateSubtotal());
+    const subtotal = parseFloat(calculateSubtotal(cartItems));
     const savings = parseFloat(calculateSavings(cartItems));
     return (subtotal - savings).toFixed(2);
   };
