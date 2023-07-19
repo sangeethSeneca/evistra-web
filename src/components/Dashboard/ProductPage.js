@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import AddProductDialog from "../FormDialog/AddEditProduct";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import axios from "axios";
 
 const ProductPage = () => {
@@ -54,6 +56,17 @@ const ProductPage = () => {
     setOpenDialog(true);
   };
 
+  const handleDelete = async (category) => {
+    try {
+      const response = await axios.delete(
+        "https://creepy-calf-gaiters.cyclic.app/products/delete"
+      );
+      setProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <>
       <Typography variant="h4">{"Products"}</Typography>
@@ -71,6 +84,8 @@ const ProductPage = () => {
               <TableCell>Model Number</TableCell>
               <TableCell>Model Name</TableCell>
               <TableCell>Price</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,6 +97,9 @@ const ProductPage = () => {
                 <TableCell>
                   <IconButton onClick={() => handleEdit(product)}>
                     <EditIcon />
+                  </IconButton>
+                  <IconButton onClick={() => handleDelete(product)}>
+                    <DeleteIcon />
                   </IconButton>
                 </TableCell>
               </TableRow>

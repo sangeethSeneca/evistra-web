@@ -126,7 +126,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 label="Model Number"
                 fullWidth
               />
-              <ErrorMessage name="modelNumer" component="div" />
+              <ErrorMessage
+                name="modelNumer"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -136,7 +140,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 fullWidth
                 sx={{ margin: "10px auto" }}
               />
-              <ErrorMessage name="modelName" component="div" />
+              <ErrorMessage
+                name="modelName"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -145,7 +153,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 options={categories}
                 label="Category"
               />
-              <ErrorMessage name="category" component="div" />
+              <ErrorMessage
+                name="category"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -155,7 +167,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 fullWidth
                 sx={{ margin: "10px auto" }}
               />
-              <ErrorMessage name="price" component="div" />
+              <ErrorMessage
+                name="price"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -165,7 +181,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 fullWidth
                 sx={{ margin: "10px auto" }}
               />
-              <ErrorMessage name="year" component="div" />
+              <ErrorMessage
+                name="year"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -175,7 +195,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 label="Color"
               />
 
-              <ErrorMessage name="category" component="div" />
+              <ErrorMessage
+                name="category"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
@@ -187,7 +211,11 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
                 placeholder="Description"
               />
 
-              <ErrorMessage name="description" component="div" />
+              <ErrorMessage
+                name="description"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
             </FormControl>
           </DialogContent>
           <DialogActions

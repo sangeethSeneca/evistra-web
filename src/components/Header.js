@@ -20,11 +20,15 @@ const Header = () => {
     setOpen(true);
   };
 
+  const handleNavigate = (route) => {
+    router.push(route)
+  }
+
   return (
     <AppBar position="static" style={{ backgroundColor: "#3c6620" }}>
       <Toolbar>
         <Typography
-          onClick={() => router.push("/")}
+          onClick={() => handleNavigate("/")}
           variant="h6"
           component="div"
           sx={{ flexGrow: 1, cursor: "pointer", marginTop: "10px" }}
@@ -37,16 +41,16 @@ const Header = () => {
           />
         </Typography>
 
-        <Button color="inherit" onClick={() => router.push("/")}>
+        <Button color="inherit" onClick={() => handleNavigate("/")}>
           Home
         </Button>
-        <Button color="inherit" onClick={() => router.push("/products")}>
+        <Button color="inherit" onClick={() => handleNavigate("/products")}>
           Products
         </Button>
-        <Button color="inherit" onClick={() => router.push("/about-us")}>
+        <Button color="inherit" onClick={() => handleNavigate("/about-us")}>
           About
         </Button>
-        <Button color="inherit" onClick={() => router.push("/contact-us")}>
+        <Button color="inherit" onClick={() => handleNavigate("/contact-us")}>
           Contact
         </Button>
         <IconButton
@@ -59,7 +63,7 @@ const Header = () => {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <Button color="inherit" onClick={() => router.push("/login")}>
+        <Button color="inherit" onClick={() => handleNavigate("/login")}>
           Login
         </Button>
       </Toolbar>

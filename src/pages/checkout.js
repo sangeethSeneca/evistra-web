@@ -20,6 +20,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { calculateItemTotal, calculateSavings, calculateSubtotal } from "../util/commonUtil";
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([
@@ -80,27 +81,9 @@ const Checkout = () => {
     setCartItems(updatedCartItems);
   };
 
-  const calculateItemTotal = (item) => {
-    return (item.price * item.quantity).toFixed(2);
-  };
 
-  const calculateSubtotal = () => {
-    let subtotal = 0;
-    cartItems.forEach((item) => {
-      subtotal += item.price * item.quantity;
-    });
-    return subtotal.toFixed(2);
-  };
 
-  const calculateSavings = () => {
-    let savings = 0;
-    cartItems.forEach((item) => {
-      const originalPrice = item.price * item.quantity;
-      const discountedPrice = originalPrice * 0.1; // 10% discount
-      savings += discountedPrice;
-    });
-    return savings.toFixed(2);
-  };
+
 
   const calculateTotal = () => {
     const subtotal = parseFloat(calculateSubtotal());
@@ -194,7 +177,7 @@ const Checkout = () => {
           <Typography>
             Shipping: {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
           </Typography>
-          <Typography>Subtotal: ${calculateSubtotal()}</Typography>
+          <Typography>Subtotal: ${calculateSubtotal(cartItems)}</Typography>
           <Typography>My Savings: ${calculateSavings()}</Typography>
           <Typography>
             Total before tax &amp; shipping: ${calculateTotal()}

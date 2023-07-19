@@ -15,10 +15,10 @@ const Footer = () => {
         width: "100%",
       }}
     >
-      <Typography variant="body2" color="textSecondary">
+      <Typography data-testid="footer-1" variant="body2" color="textSecondary">
         © {new Date().getFullYear()} Your Website. All rights reserved.
       </Typography>
-      <Typography variant="body2" color="textSecondary">
+      <Typography data-testid="footer-2" variant="body2" color="textSecondary">
         <Link href="/" target="_blank" rel="noopener noreferrer">
           Evistra
         </Link>
