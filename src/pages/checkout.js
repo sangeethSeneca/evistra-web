@@ -87,7 +87,7 @@ const Checkout = () => {
 
   const calculateTotal = () => {
     const subtotal = parseFloat(calculateSubtotal());
-    const savings = parseFloat(calculateSavings());
+    const savings = parseFloat(calculateSavings(cartItems));
     return (subtotal - savings).toFixed(2);
   };
 
@@ -178,7 +178,7 @@ const Checkout = () => {
             Shipping: {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
           </Typography>
           <Typography>Subtotal: ${calculateSubtotal(cartItems)}</Typography>
-          <Typography>My Savings: ${calculateSavings()}</Typography>
+          <Typography>My Savings: ${calculateSavings(cartItems)}</Typography>
           <Typography>
             Total before tax &amp; shipping: ${calculateTotal()}
           </Typography>
