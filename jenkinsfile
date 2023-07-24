@@ -1,0 +1,14 @@
+pipeline{
+    agent any
+    stages{
+        stage('Jenkins first Demo'){
+            steps{
+                echo "welcome to devopshint"
+
+            }
+
+        }
+
+    }
+
+}
