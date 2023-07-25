@@ -178,8 +178,8 @@ describe("Signup component", () => {
     const { getByPlaceholderText } = render(< Signup />);
 
     const confirmPasswordInput = getByPlaceholderText("Confirm Password");
-    fireEvent.change(confirmPasswordInput, { target: { value: " Password!12345" } });
-    expect(confirmPasswordInput.value).toBe(" Password!12345");
+    fireEvent.change(confirmPasswordInput, { target: { value: " Password!123" } });
+    expect(confirmPasswordInput.value).toBe(" Password!123");
   });
 
   test("Confirm Password: Test for Space Except Beginning and End", () => {
