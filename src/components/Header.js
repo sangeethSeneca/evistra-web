@@ -6,23 +6,36 @@ import {
   Button,
   IconButton,
   Badge,
+  TextField,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ShoppingCart from "./Cart";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [showSearchBox, setShowSearchBox] = useState(false); // New state to control search box visibility
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleNavigate = (route) => {
-    router.push(route)
-  }
+    router.push(route);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const toggleSearchBox = () => {
+    setShowSearchBox((prev) => !prev);
+  };
+
+  // You can use the searchValue to filter or search data in your application
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#3c6620" }}>
@@ -41,33 +54,50 @@ const Header = () => {
           />
         </Typography>
 
-        <Button color="inherit" onClick={() => handleNavigate("/")}>
-          Home
-        </Button>
-        <Button color="inherit" onClick={() => handleNavigate("/products")}>
-          Products
-        </Button>
-        <Button color="inherit" onClick={() => handleNavigate("/about-us")}>
-          About
-        </Button>
-        <Button color="inherit" onClick={() => handleNavigate("/contact-us")}>
-          Contact
-        </Button>
-        <IconButton
-          edge="end"
-          color="inherit"
-          aria-label="cart"
-          onClick={handleOpen}
-        >
-          <Badge color="error">
-            <ShoppingCartIcon />
-          </Badge>
+        {showSearchBox ? (
+          <TextField
+            //label="Search"
+            placeholder="Search Product"
+            variant="outlined"
+            value={searchValue}
+            onChange={handleSearchInputChange}
+            sx={{ flexGrow: 1, maxWidth: "400px", marginLeft: "10px", backgroundColor: "#fff" }}
+          />
+        ) : (
+          <React.Fragment>
+            <Button color="inherit" onClick={() => handleNavigate("/")}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => handleNavigate("/products")}>
+              Products
+            </Button>
+            <Button color="inherit" onClick={() => handleNavigate("/about-us")}>
+              About
+            </Button>
+            <Button color="inherit" onClick={() => handleNavigate("/contact-us")}>
+              Contact
+            </Button>
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="cart"
+              onClick={handleOpen}
+            >
+              <Badge color="error">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+
+            <Button color="inherit" onClick={() => handleNavigate("/login")}>
+              Login
+            </Button>
+          </React.Fragment>
+        )}
+
+        <IconButton color="inherit" onClick={toggleSearchBox}>
+          <SearchIcon />
         </IconButton>
-        <Button color="inherit" onClick={() => handleNavigate("/login")}>
-          Login
-        </Button>
       </Toolbar>
-      <ShoppingCart setOpen={setOpen} open={open} />
     </AppBar>
   );
 };

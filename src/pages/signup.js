@@ -99,7 +99,7 @@ function Signup() {
         <div style={styles.formGroup}>
           <label>
             <input
-              type="email"
+              type="email"  // Change the type to "email"
               value={email}
               onChange={handleEmailChange}
               placeholder="Email"
@@ -108,6 +108,7 @@ function Signup() {
             />
           </label>
         </div>
+
         <div style={styles.formGroup}>
           <label>
             <input
