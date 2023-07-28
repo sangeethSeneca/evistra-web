@@ -52,7 +52,7 @@ function Products(props) {
               <ProductCard
                 price={product.price}
                 name={product.name}
-                image={`${product.image}${index}.jpg`}
+                image={product.image}
               />
             </Item>
           </Grid>
