@@ -218,7 +218,7 @@ const ProductKFText = styled(Typography)({
 function ProductDetailPage() {
   const router = useRouter();
 
-  const { price, image, name, description } = router.query;
+  const { price, image, modelName, Description, Color, Brandname } = router.query;
   const product = {
     image: "images/1.jpg",
     brand: "NCC",
@@ -252,28 +252,30 @@ function ProductDetailPage() {
           </ProductImageContainer>
           <div>
             <ProductName variant="h2" component="h1">
-              {name}
+              {modelName}
             </ProductName>
-            <BrandNameContainer>Brand: {product.brand}</BrandNameContainer>
+            <BrandNameContainer>Brand: {Brandname}</BrandNameContainer>
             <div>
               <Rating rating={product.rating} numReviews={product.numReviews} />
             </div>
             <hr />
             <PriceContainer>
               <Price variant="h4" component="h2">
-                {product.price}
+                {price}
               </Price>
               <TaxText variant="body2">Excl Tax</TaxText>
             </PriceContainer>
             <ItemDescriptionContainer>
               <ItemDescription variant="body1">
-                {description}
+                {Description}
               </ItemDescription>
               <div>
                 <hr />
                 <ColorContainer>
                   <ColorFeature>Color Name:</ColorFeature>
-                  <ColorBox color="#0198a5" />
+                  <div>
+                    <ColorBox color={Color} />
+                  </div>
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
@@ -287,11 +289,11 @@ function ProductDetailPage() {
               Add to Cart
             </AddToCartButton>
           </div>
-        </div>
-      </ProductDetailContainer>
+        </div >
+      </ProductDetailContainer >
 
 
-    </div>
+    </div >
   );
 }
 export default ProductDetailPage;
