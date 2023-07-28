@@ -280,12 +280,12 @@ function ProductDetailPage() {
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
-            <FeaturesContainer>
+            {/* <FeaturesContainer>
               <Features variant="h2" component="h2">
                 Features
               </Features>
               <ItemDescription variant="body1">{features}</ItemDescription>
-            </FeaturesContainer>
+            </FeaturesContainer> */}
             <AddToCartButton variant="contained" onClick={handleAddToCart}>
               Add to Cart
             </AddToCartButton>
