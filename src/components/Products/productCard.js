@@ -7,8 +7,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 
-export default function ProductCard({ price, name, description, image }) {
+export default function ProductCard({ price, name, description, image, product }) {
   const router = useRouter();
+
+  const handleClick = () => {
+    router.push({
+      pathname: "/product-detail", // Replace with your desired destination page path
+      query: product, // The object you want to pass
+    });
+  };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -28,7 +35,7 @@ export default function ProductCard({ price, name, description, image }) {
         </Typography>
       </CardContent>
       <CardActions style={{ display: "block" }}>
-        <Button size="small" onClick={() => router.push("product-detail")}>
+        <Button size="small" onClick={handleClick}>
           Buy Now
         </Button>
         <Button size="small" onClick={() => router.push("contact-us")}>

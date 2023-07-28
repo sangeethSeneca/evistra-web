@@ -5,6 +5,7 @@ import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useRouter } from "next/router";
 
 const ProductDetailContainer = styled("div")({
   display: "flex",
@@ -25,7 +26,7 @@ const ProductImageContainer = styled("div")({
 
 const ProductImage = styled("img")({
   boxSizing: "border-box",
- marginTop:"20px",
+  marginTop: "20px",
   height: "300px",
   justifySelf: "end",
 });
@@ -215,6 +216,9 @@ const ProductKFText = styled(Typography)({
 });
 
 function ProductDetailPage() {
+  const router = useRouter();
+
+  const { price, image, name, description } = router.query;
   const product = {
     image: "images/1.jpg",
     brand: "NCC",
@@ -242,51 +246,51 @@ function ProductDetailPage() {
   return (
     <div>
       <ProductDetailContainer>
-        <div style={{margin:'auto', display:"flex"}}>
-        <ProductImageContainer>
-          <ProductImage src={product.image} alt="Product" />
-        </ProductImageContainer>
-        <div>
-          <ProductName variant="h2" component="h1">
-            {product.name}
-          </ProductName>
-          <BrandNameContainer>Brand: {product.brand}</BrandNameContainer>
+        <div style={{ margin: 'auto', display: "flex" }}>
+          <ProductImageContainer>
+            <ProductImage src={image} alt="Product" />
+          </ProductImageContainer>
           <div>
-            <Rating rating={product.rating} numReviews={product.numReviews} />
-          </div>
-          <hr />
-          <PriceContainer>
-            <Price variant="h4" component="h2">
-              {product.price}
-            </Price>
-            <TaxText variant="body2">Excl Tax</TaxText>
-          </PriceContainer>
-          <ItemDescriptionContainer>
-            <ItemDescription variant="body1">
-              {product.description}
-            </ItemDescription>
+            <ProductName variant="h2" component="h1">
+              {name}
+            </ProductName>
+            <BrandNameContainer>Brand: {product.brand}</BrandNameContainer>
             <div>
-              <hr />
-              <ColorContainer>
-                <ColorFeature>Color Name:</ColorFeature>
-                <ColorBox color="#0198a5" />
-              </ColorContainer>
+              <Rating rating={product.rating} numReviews={product.numReviews} />
             </div>
-          </ItemDescriptionContainer>
-          <FeaturesContainer>
-            <Features variant="h2" component="h2">
-              Features
-            </Features>
-            <ItemDescription variant="body1">{features}</ItemDescription>
-          </FeaturesContainer>
-          <AddToCartButton variant="contained" onClick={handleAddToCart}>
-            Add to Cart
-          </AddToCartButton>
-        </div>
+            <hr />
+            <PriceContainer>
+              <Price variant="h4" component="h2">
+                {product.price}
+              </Price>
+              <TaxText variant="body2">Excl Tax</TaxText>
+            </PriceContainer>
+            <ItemDescriptionContainer>
+              <ItemDescription variant="body1">
+                {description}
+              </ItemDescription>
+              <div>
+                <hr />
+                <ColorContainer>
+                  <ColorFeature>Color Name:</ColorFeature>
+                  <ColorBox color="#0198a5" />
+                </ColorContainer>
+              </div>
+            </ItemDescriptionContainer>
+            <FeaturesContainer>
+              <Features variant="h2" component="h2">
+                Features
+              </Features>
+              <ItemDescription variant="body1">{features}</ItemDescription>
+            </FeaturesContainer>
+            <AddToCartButton variant="contained" onClick={handleAddToCart}>
+              Add to Cart
+            </AddToCartButton>
+          </div>
         </div>
       </ProductDetailContainer>
 
-     
+
     </div>
   );
 }

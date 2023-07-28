@@ -53,6 +53,7 @@ function Products(props) {
                 price={product.price}
                 name={product.modelName}
                 image={product.image}
+                product={product}
               />
             </Item>
           </Grid>
