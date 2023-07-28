@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -6,6 +7,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleEmailChange = (e) => {
@@ -16,9 +18,21 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform signup logic here
+    const payload = {
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await axios.post(
+        "https://creepy-calf-gaiters.cyclic.app/auth/signin", payload
+      );
+      router.push("/admin-dashboard")
+
+    } catch (error) {
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -41,7 +55,7 @@ export default function Login() {
           <label>
             <input
               type="password"
-              value={confirmPassword}
+              value={password}
               onChange={handlePasswordChange}
               placeholder="Password"
               style={styles.input}
@@ -49,10 +63,10 @@ export default function Login() {
             />
           </label>
         </div>
+        <h4 style={{ color: "red" }}>{error ? error : null}</h4>
         <div style={styles.center}>
           <button
             type="submit"
-            onClick={() => router.push("/admin-dashboard")}
             style={styles.button}
           >
             Sign in
