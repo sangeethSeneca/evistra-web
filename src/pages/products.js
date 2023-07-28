@@ -51,7 +51,7 @@ function Products(props) {
             <Item>
               <ProductCard
                 price={product.price}
-                name={product.name}
+                name={product.modelName}
                 image={product.image}
               />
             </Item>
