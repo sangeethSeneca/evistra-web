@@ -17,7 +17,7 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [showSearchBox, setShowSearchBox] = useState(false); // New state to control search box visibility
+  const [showSearchBox, setShowSearchBox] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -35,8 +35,6 @@ const Header = () => {
     setShowSearchBox((prev) => !prev);
   };
 
-  // You can use the searchValue to filter or search data in your application
-
   return (
     <AppBar position="static" style={{ backgroundColor: "#3c6620" }}>
       <Toolbar>
@@ -44,14 +42,18 @@ const Header = () => {
           onClick={() => handleNavigate("/")}
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, cursor: "pointer", marginTop: "10px" }}
+          sx={{ flexGrow: 1, cursor: "pointer", marginTop: "10px", }}
         >
           <img
             src="/images/logo.png"
             width="60px"
             height="60px"
-            sx={{ marginTop: "10px" }}
+            sx={{ marginTop: "10px", float: 'left' }}
           />
+
+          <span style={{ margin: "8px 8px 8px 20px", fontSize: "30px", fontWeight: "bold", float: 'left', position: 'absolute' }} onClick={() => handleNavigate("/")}>
+            EVISTRA
+          </span>
         </Typography>
 
         {showSearchBox ? (
