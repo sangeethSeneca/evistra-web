@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 
-export default function ProductCard({ price, name, description, image, product }) {
+export default function ProductCard({ price, name, description, image, product, brand, color }) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -18,12 +18,12 @@ export default function ProductCard({ price, name, description, image, product }
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500 }}>
       <CardMedia
         component="img"
         alt="product"
-        width="250px"
-        height="250px"
+        width="300px"
+        height="300px"
         image={image}
       />
       <CardContent>
