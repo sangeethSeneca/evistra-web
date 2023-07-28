@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 function Signup() {
@@ -7,6 +9,7 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -24,10 +27,11 @@ function Signup() {
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (emailRegex.test(value) || value === "") {
-      setEmail(value);
-    }
+    setEmail(value);
+    // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // if (emailRegex.test(value) || value === "") {
+
+    // }
   };
 
   const handlePhoneChange = (e) => {
@@ -40,33 +44,42 @@ function Signup() {
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
-    const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z])(?!^\s).{8,}$/;
-    if (passwordRegex.test(value) || value === "") {
-      setPassword(value);
-    }
+    setPassword(value);
+    // const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z])(?!^\s).{8,}$/;
+    // if (passwordRegex.test(value) || value === "") {
+
+    // }
   };
 
   const handleConfirmPasswordChange = (e) => {
     const value = e.target.value;
-    const confirmPasswordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z]).{8,}$/;
-    if (confirmPasswordRegex.test(value) || value === "") {
-      setConfirmPassword(value);
-    }
+    setConfirmPassword(value);
+
+    // const confirmPasswordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z]).{8,}$/;
+    // if (confirmPasswordRegex.test(value) || value === "") {
+    //   setConfirmPassword(value);
+    // }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform signup logic here
-    console.log("Signup form submitted");
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("Phone:", phone);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
 
-    if (onSubmit) {
-      onSubmit();
+    const payload = {
+      fName: firstName,
+      lName: lastName,
+      email: email,
+      phoneNumber: phone,
+      password: password,
+    };
+    alert('ss')
+    try {
+      const response = await axios.post(
+        "https://creepy-calf-gaiters.cyclic.app/auth/register", payload
+      );
+      router.push('/login');
+      setData(response.data.products);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -146,7 +159,7 @@ function Signup() {
           </label>
         </div>
         <div style={styles.center}>
-          <button type="submit" style={styles.button}>
+          <button type="submit" style={styles.button} onClick={handleSubmit}>
             Sign Up
           </button>
         </div>
