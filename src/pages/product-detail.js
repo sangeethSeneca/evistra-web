@@ -22,6 +22,7 @@ const ProductImageContainer = styled("div")({
   display: "absolute",
   justifyContent: "center",
   marginTop: "-20px",
+  marginRight: "20px"
 });
 
 const ProductImage = styled("img")({
