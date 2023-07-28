@@ -71,7 +71,6 @@ function Signup() {
       phoneNumber: phone,
       password: password,
     };
-    alert('ss')
     try {
       const response = await axios.post(
         "https://creepy-calf-gaiters.cyclic.app/auth/register", payload
