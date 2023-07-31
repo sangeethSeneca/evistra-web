@@ -25,7 +25,7 @@ describe("AboutUs component", () => {
     });
 
 
-    test("displays the Thank you text", () => {
+    test("displays the Thank", () => {
         const { getByText } = render(<AboutUs />);
         const textailElement = getByText("Thank you for visiting our website. We look forward to serving you!");
         expect(textailElement).toBeInTheDocument();

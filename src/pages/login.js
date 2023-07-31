@@ -28,6 +28,7 @@ export default function Login() {
       const response = await axios.post(
         "https://creepy-calf-gaiters.cyclic.app/auth/signin", payload
       );
+      localStorage.setItem('token', response.data.token)
       router.push("/admin-dashboard")
 
     } catch (error) {
