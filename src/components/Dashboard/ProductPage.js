@@ -91,8 +91,8 @@ const ProductPage = () => {
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.code}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.modelId}</TableCell>
+                <TableCell>{product.modelName}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleEdit(product)}>
