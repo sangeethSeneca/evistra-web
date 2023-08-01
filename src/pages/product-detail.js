@@ -6,6 +6,8 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/cartSlice";
 
 const ProductDetailContainer = styled("div")({
   display: "flex",
@@ -218,8 +220,9 @@ const ProductKFText = styled(Typography)({
 
 function ProductDetailPage() {
   const router = useRouter();
+  const dispatch = useDispatch()
 
-  const { price, image, modelName, Description, Color, Brandname } = router.query;
+  const { price, image, modelName, Description, Color, Brandname, _id } = router.query;
   const product = {
     image: "images/1.jpg",
     brand: "NCC",
@@ -241,7 +244,7 @@ function ProductDetailPage() {
 `;
 
   const handleAddToCart = () => {
-    console.log("Product added to cart");
+    dispatch(addItem({ _id, price, image, modelName, Description, Color, Brandname }));
   };
 
   return (
@@ -280,7 +283,7 @@ function ProductDetailPage() {
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
-            <AddToCartButton variant="contained" onClick={handleAddToCart}>
+            <AddToCartButton variant="contained" onClick={() => handleAddToCart()}>
               Add to Cart
             </AddToCartButton>
           </div>

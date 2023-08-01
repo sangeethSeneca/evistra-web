@@ -89,7 +89,7 @@ const ProductPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product) => (
+            {products?.map((product) => (
               <TableRow key={product.code}>
                 <TableCell>{product.modelId}</TableCell>
                 <TableCell>{product.modelName}</TableCell>

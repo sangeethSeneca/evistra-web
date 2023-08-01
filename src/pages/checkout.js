@@ -21,38 +21,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { calculateItemTotal, calculateSavings, calculateSubtotal } from "../util/commonUtil";
+import { useSelector } from "react-redux";
 
 const Checkout = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "A99-2C0",
-      price: 266.25,
-      quantity: 1,
-      image: "/images/1.jpg",
-    },
-    {
-      id: 2,
-      name: "E-BIKE200-2",
-      price: 356.25,
-      quantity: 2,
-      image: "/images/2.jpg",
-    },
-    {
-      id: 3,
-      name: "A-200",
-      price: 256.25,
-      quantity: 1,
-      image: "/images/3.jpg",
-    },
-    {
-      id: 4,
-      name: "X-BIKE200",
-      price: 216.25,
-      quantity: 1,
-      image: "/images/4.jpg",
-    },
-  ]);
+  const cartItems = useSelector((state) => state.cart.items);
+
+
 
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -100,7 +74,7 @@ const Checkout = () => {
   };
 
   return (
-    <Container sx={{ marginTop: 4 }}>
+    <Container sx={{ marginTop: 4, height: "90vh" }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom>
@@ -121,14 +95,14 @@ const Checkout = () => {
               </TableHead>
               <TableBody>
                 {cartItems.map((item) => (
-                  <TableRow key={item.id}>
+                  <TableRow key={item._id}>
                     <TableCell>
                       <img
                         src={item.image}
-                        alt={item.name}
+                        alt={item.modelName}
                         style={{ height: "50px" }}
                       />
-                      <Typography>{item.name}</Typography>
+                      <Typography>{item.modelName}</Typography>
                     </TableCell>
                     <TableCell>${item.price}</TableCell>
                     <TableCell>

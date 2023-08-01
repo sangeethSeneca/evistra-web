@@ -13,19 +13,16 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../../../store/cartSlice";
 
 const ShoppingCart = ({ open, setOpen }) => {
   const router = useRouter();
+  const items = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch()
 
-  const [items, setItems] = useState([
-    { id: 1, name: "Product 1", price: 10 },
-    { id: 2, name: "Product 2", price: 15 },
-    { id: 3, name: "Product 3", price: 20 },
-  ]);
-
-  const removeItem = (id) => {
-    const updatedItems = items.filter((item) => item.id !== id);
-    setItems(updatedItems);
+  const removeProduct = (id) => {
+    dispatch(removeItem(id));
   };
 
   const handleClose = () => {
@@ -55,14 +52,14 @@ const ShoppingCart = ({ open, setOpen }) => {
             {items.map((item) => (
               <ListItem key={item.id}>
                 <ListItemText
-                  primary={item.name}
+                  primary={item.modelName}
                   secondary={`$${item.price}`}
                 />
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeProduct(item._id)}
                   >
                     <DeleteIcon />
                   </IconButton>

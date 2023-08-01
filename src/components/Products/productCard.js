@@ -6,9 +6,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 export default function ProductCard({ price, name, description, image, product, brand, color }) {
   const router = useRouter();
+  const dispatch = useDispatch()
 
   const handleClick = () => {
     router.push({

@@ -5,6 +5,8 @@ import createCache from "@emotion/cache";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 const cache = createCache({ key: "css", prepend: true });
 
@@ -16,12 +18,14 @@ function MyApp({ Component, pageProps }) {
   );
 
   return (
-    <CacheProvider value={cache}>
-      <CssBaseline />
-      {!isDisabled && <Header />}
-      <Component {...pageProps} />
-      {!isDisabled && <Footer />}
-    </CacheProvider>
+    <Provider store={store}>
+      <CacheProvider value={cache}>
+        <CssBaseline />
+        {!isDisabled && <Header />}
+        <Component {...pageProps} />
+        {!isDisabled && <Footer />}
+      </CacheProvider>
+    </Provider>
   );
 }
 
