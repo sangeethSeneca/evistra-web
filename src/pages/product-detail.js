@@ -293,7 +293,6 @@ function ProductDetailPage() {
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
-<<<<<<< HEAD
             <FeaturesContainer>
               <Features variant="h2" component="h2">
                 Features
@@ -302,9 +301,6 @@ function ProductDetailPage() {
                 -</ItemDescription>
             </FeaturesContainer>
             <AddToCartButton variant="contained" onClick={handleAddToCart}>
-=======
-            <AddToCartButton variant="contained" onClick={() => handleAddToCart()}>
->>>>>>> 3e2336080f2b873b6f1478470e3dc5dc5dbdebb8
               Add to Cart
             </AddToCartButton>
           </div>
