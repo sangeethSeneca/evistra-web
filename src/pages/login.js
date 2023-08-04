@@ -1,7 +1,8 @@
+"use client";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
+import { toast, ToastContainer } from 'react-toastify';
 export default function Login() {
   const router = useRouter();
 
@@ -39,47 +40,51 @@ export default function Login() {
       }
 
     } catch (error) {
-      setError("Invalid email or password");
+      toast.error("Invalid Username or Password", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   };
 
   return (
     <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.center}>Sign In Page</h2>
-        <div style={styles.formGroup}>
-          <label>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Email"
-              style={styles.input}
-              required
-            />
-          </label>
-        </div>
-        <div style={styles.formGroup}>
-          <label>
-            <input
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Password"
-              style={styles.input}
-              required
-            />
-          </label>
-        </div>
-        <h4 style={{ color: "red" }}>{error ? error : null}</h4>
-        <div style={styles.center}>
-          <button
-            type="submit"
-            style={styles.button}
-          >
-            Sign in
-          </button>
-        </div>
+      <div style={styles.form}>
+        <form onSubmit={handleSubmit} >
+          <h2 style={styles.center}>Sign In Page</h2>
+          <div style={styles.formGroup}>
+            <label>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Email"
+                style={styles.input}
+                required
+              />
+            </label>
+          </div>
+          <div style={styles.formGroup}>
+            <label>
+              <input
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Password"
+                style={styles.input}
+                required
+              />
+            </label>
+          </div>
+          <h4 style={{ color: "red" }}>{error ? error : null}</h4>
+          <div style={styles.center}>
+            <button
+              type="submit"
+              style={styles.button}
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
         <div style={styles.center}>
           <button
             onClick={() => router.push("/signup")}
@@ -88,7 +93,7 @@ export default function Login() {
             Sign up
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
