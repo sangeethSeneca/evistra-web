@@ -219,7 +219,7 @@ const ProductKFText = styled(Typography)({
 function ProductDetailPage() {
   const router = useRouter();
 
-  const { price, image, modelName, Description, Color, Brandname } = router.query;
+  const { price, image, modelName, Description, Color, Brandname, BikeType, WheelSize, FrameMaterial, SuspensionType, SpecialFeature, IncludedComponents } = router.query;
   const product = {
     image: "images/1.jpg",
     brand: "NCC",
@@ -280,6 +280,13 @@ function ProductDetailPage() {
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
+            <FeaturesContainer>
+              <Features variant="h2" component="h2">
+                Features
+              </Features>
+              <ItemDescription variant="body1">- Bike Type - {BikeType}
+                -</ItemDescription>
+            </FeaturesContainer>
             <AddToCartButton variant="contained" onClick={handleAddToCart}>
               Add to Cart
             </AddToCartButton>
