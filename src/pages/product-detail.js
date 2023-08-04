@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../store/cartSlice";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ProductDetailContainer = styled("div")({
   display: "flex",
   alignItems: "center",
@@ -244,7 +245,12 @@ function ProductDetailPage() {
 `;
 
   const handleAddToCart = () => {
-    dispatch(addItem({ _id, price, image, modelName, Description, Color, Brandname }));
+    toast.success('Added successfully!', {
+      position: toast.POSITION.TOP_RIGHT
+    });
+    let itemPrice = Number(price).toFixed(2);
+    dispatch(addItem({ _id, price: itemPrice, image, modelName, Description, Color, Brandname }));
+
   };
 
   return (
@@ -265,7 +271,7 @@ function ProductDetailPage() {
             <hr />
             <PriceContainer>
               <Price variant="h4" component="h2">
-                {price}
+                ${Number(price).toFixed(2)}
               </Price>
               <TaxText variant="body2">Excl Tax</TaxText>
             </PriceContainer>

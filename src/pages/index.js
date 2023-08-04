@@ -12,7 +12,7 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <div style={{ minHeight: '80vh' }}>
       <ImageSlider />
       <div style={{ display: "flex" }}>
         <div
@@ -37,6 +37,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

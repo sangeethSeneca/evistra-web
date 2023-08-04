@@ -22,11 +22,11 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { calculateItemTotal, calculateSavings, calculateSubtotal } from "../util/commonUtil";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
-
-
+  const router = useRouter();
 
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -66,7 +66,7 @@ const Checkout = () => {
   };
 
   const handleProceedToCheckout = () => {
-    setOpenDialog(true);
+    router.push('/payment');
   };
 
   const handleCloseDialog = () => {
@@ -138,7 +138,7 @@ const Checkout = () => {
         <Grid item xs={12}>
           <Button
             variant="contained"
-            color="primary"
+            style={{ backgroundColor: '#3c6620' }}
             onClick={handleProceedToCheckout}
           >
             Proceed to Checkout

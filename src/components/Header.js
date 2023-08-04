@@ -21,7 +21,6 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showSearchBox, setShowSearchBox] = useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -97,8 +96,8 @@ const Header = () => {
                 Login
               </Button>}
             {isAuthorized &&
-              <Button color="inherit" onClick={() => handleNavigate("/admin-dashboard")}>
-                User
+              <Button color="inherit" onClick={() => handleNavigate(localStorage.getItem('userRole') === 'Admin' ? "/admin-dashboard" : "/client-dashboard")}>
+                {localStorage.getItem('userName')}
               </Button>}
           </React.Fragment>
         )}

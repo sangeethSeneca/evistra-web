@@ -30,7 +30,7 @@ export default function ProductCard({ price, name, description, image, product, 
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {price}
+          ${Number(price).toFixed(2)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {name}

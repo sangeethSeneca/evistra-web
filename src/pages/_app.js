@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }) {
     router.pathname
   );
 
+
   return (
     <Provider store={store}>
       <CacheProvider value={cache}>

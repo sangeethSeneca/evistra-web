@@ -28,8 +28,15 @@ export default function Login() {
       const response = await axios.post(
         "https://creepy-calf-gaiters.cyclic.app/auth/signin", payload
       );
-      localStorage.setItem('token', response.data.token)
-      router.push("/admin-dashboard")
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userRole', response.data.userRole);
+      localStorage.setItem('userName', response.data.userName);
+      if (response.data.userRole === 'Admin') {
+        window.location.href = "/admin-dashboard";
+      }
+      else {
+        window.location.href = "/client-dashboard";
+      }
 
     } catch (error) {
       setError("Invalid email or password");

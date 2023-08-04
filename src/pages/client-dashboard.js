@@ -13,15 +13,16 @@ import OrderPage from "../components/Dashboard/OrdersPage";
 import CategoryPage from "../components/Dashboard/CategoryPage";
 import { useRouter } from "next/router";
 import useAuthorization from "../components/hooks/useAuthorization";
+import MyOrderPage from "../components/ClientDashboard/OrdersPage";
 
-const Dashboard = () => {
+const ClientDashboard = () => {
   const router = useRouter();
   const [navItem, setNavItem] = useState("home");
   const isAuthorized = useAuthorization();
 
 
 
-  const navItems = ["Categories", "Products", "Orders", "Customers", "Users"];
+  const navItems = ["My Orders", "Messages", "Settings"];
   if (isAuthorized) {
     return (
       <Grid container spacing={2}>
@@ -62,8 +63,7 @@ const Dashboard = () => {
             elevation={3}
             sx={{ height: "100vh", padding: "16px", overflow: "scroll" }}
           >
-            {navItem === "Products" && <ProductPage />}
-            {navItem === "Orders" && <OrderPage />}
+            {navItem === "My Orders" && <MyOrderPage />}
             {navItem === "Categories" && <CategoryPage />}
           </Paper>
         </Grid>
@@ -72,4 +72,4 @@ const Dashboard = () => {
   } else return <></>;
 };
 
-export default Dashboard;
+export default ClientDashboard;

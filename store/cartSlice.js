@@ -11,11 +11,17 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            console.log(state.items);
+            let obj = action.payload;
             let itemsTemp = [...state.items];
-            itemsTemp.push(action.payload)
+            let findIndex = itemsTemp.findIndex((item) => item.modelName === obj.modelName)
+            if (findIndex !== -1) {
+                console.log(obj.quantity);
+                itemsTemp[findIndex].quantity = itemsTemp[findIndex].quantity + 1;
+            }
+            else {
+                itemsTemp.push({ ...obj, quantity: 1 })
+            }
             state.items = itemsTemp;
-
         },
         removeItem: (state, action) => {
             let itemsTemp = [...state.items];
