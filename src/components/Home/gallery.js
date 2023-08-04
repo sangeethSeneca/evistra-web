@@ -1,22 +1,24 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import { zeroRightClassName, fullWidthClassName, noScrollbarsClassName } from 'react-remove-scroll-bar';
 
 export default function Gallery() {
   return (
-    <div style={{ overflowY: "hidden" }}>
+    <div style={{ overflowClipY: "hidden" }}>
       <ImageList
-        sx={{ width: 1100, height: 550, margin: "auto" }}
+        sx={{ width: 1070, height: 550, margin: "auto" }} // Adjust width here
         cols={3}
         rowHeight={350}
       >
         {itemData.map((item) => (
-          <ImageListItem key={item.img}>
+          <ImageListItem key={item.img} sx={polaroidStyle}>
             <img
               src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
               srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               alt={item.title}
               loading="lazy"
+              style={{ borderRadius: "10px", objectFit: "cover" }}
             />
           </ImageListItem>
         ))}
@@ -24,6 +26,13 @@ export default function Gallery() {
     </div>
   );
 }
+
+const polaroidStyle = {
+  borderRadius: "10px",
+  boxShadow: "0px 1px 1px 1px rgba(0, 128, 0, 1)",
+  padding: "13px",
+  marginBottom: "20px",
+};
 
 const itemData = [
   {

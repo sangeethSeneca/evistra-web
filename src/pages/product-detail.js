@@ -223,7 +223,7 @@ function ProductDetailPage() {
   const router = useRouter();
   const dispatch = useDispatch()
 
-  const { price, image, modelName, Description, Color, Brandname, BikeType, WheelSize, FrameMaterial, SuspensionType, SpecialFeature, IncludedComponents } = router.query;
+  const { _id, price, image, modelName, Description, Color, Brandname, BikeType, WheelSize, FrameMaterial, SuspensionType, SpecialFeature, IncludedComponents } = router.query;
   const product = {
     image: "images/1.jpg",
     brand: "NCC",

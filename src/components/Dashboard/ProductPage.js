@@ -108,7 +108,7 @@ const ProductPage = () => {
               <TableRow key={product.code}>
                 <TableCell>{product.modelId}</TableCell>
                 <TableCell>{product.modelName}</TableCell>
-                <TableCell>{product.price}</TableCell>
+                <TableCell>${product.price}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleEdit(product)}>
                     <EditIcon />
