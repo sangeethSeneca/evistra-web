@@ -14,25 +14,36 @@ import {
 import AddCategoryDialog from "../FormDialog/AddEditCategory";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
-const CategoryPage = () => {
+import { toast, ToastContainer } from 'react-toastify';
+import DeleteIcon from "@mui/icons-material/Delete";
+
+
+const UserPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({});
-  const [categories, setCategories] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://creepy-calf-gaiters.cyclic.app/categories"
-        );
-        setCategories(response.data.categories);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+
 
     fetchData();
   }, []);
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://creepy-calf-gaiters.cyclic.app/users", {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        }
+      }
+      );
+      setUsers(response.data.users);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -43,7 +54,7 @@ const CategoryPage = () => {
   };
 
   const handleAddCategory = (newProduct) => {
-    setCategories([...categories, newProduct]);
+    setUsers([...users, newProduct]);
     setSelectedCategory(null);
   };
 
@@ -52,34 +63,67 @@ const CategoryPage = () => {
     setOpenDialog(true);
   };
 
+  const handleDelete = async (user) => {
+    try {
+      const response = await axios.delete(
+        "https://creepy-calf-gaiters.cyclic.app/users/delete", {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        },
+        data: user
+      }
+      );
+      fetchData();
+      toast.success('User Deleted successfully!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <>
-      <Typography variant="h4">{"Categories"}</Typography>
+      <Typography variant="h4">{"Users"}</Typography>
       <Button
         variant="outlined"
         sx={{ border: "2px solid #3c6620 ", color: "#3c6620" }}
         onClick={handleOpenDialog}
       >
-        Add Category
+        Add User
       </Button>
       <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Code</TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell>First Name</TableCell>
+              <TableCell>Last Name</TableCell>
+              <TableCell>User Type</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Phone Number</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {categories.map((category) => (
-              <TableRow key={category.id}>
-                <TableCell>{category.categoryId}</TableCell>
-                <TableCell>{category.categoryType}</TableCell>
+            {users?.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.fName}</TableCell>
+                <TableCell>{user.lName}</TableCell>
+                <TableCell>{user.userType}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.phoneNumber}</TableCell>
                 <TableCell>
-                  <IconButton onClick={() => handleEdit(category)}>
+                  <IconButton onClick={() => handleEdit(user)}>
                     <EditIcon />
                   </IconButton>
                 </TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleDelete(user)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
@@ -97,4 +141,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default UserPage;

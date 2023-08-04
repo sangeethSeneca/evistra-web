@@ -25,7 +25,11 @@ const OrderPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://creepy-calf-gaiters.cyclic.app/orders"
+          "https://creepy-calf-gaiters.cyclic.app/orders", {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        }
         );
         setOrders(response.data.orders);
       } catch (error) {

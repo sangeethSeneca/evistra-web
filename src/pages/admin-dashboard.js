@@ -13,6 +13,7 @@ import OrderPage from "../components/Dashboard/OrdersPage";
 import CategoryPage from "../components/Dashboard/CategoryPage";
 import { useRouter } from "next/router";
 import useAuthorization from "../components/hooks/useAuthorization";
+import UserPage from "../components/Dashboard/UsersPage";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -65,6 +66,7 @@ const Dashboard = () => {
             {navItem === "Products" && <ProductPage />}
             {navItem === "Orders" && <OrderPage />}
             {navItem === "Categories" && <CategoryPage />}
+            {navItem === "Users" && <UserPage />}
           </Paper>
         </Grid>
       </Grid>
