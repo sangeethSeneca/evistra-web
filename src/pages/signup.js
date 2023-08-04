@@ -76,6 +76,9 @@ function Signup() {
       setError('Password do not match')
       return;
     }
+    else {
+      setError("");
+    }
 
     const payload = {
       fName: firstName,
