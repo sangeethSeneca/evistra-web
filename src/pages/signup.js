@@ -30,7 +30,7 @@ function Signup() {
     setEmail(value);
     // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // if (emailRegex.test(value) || value === "") {
-
+    // setEmail(value);
     // }
   };
 
@@ -47,7 +47,7 @@ function Signup() {
     setPassword(value);
     // const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z])(?!^\s).{8,}$/;
     // if (passwordRegex.test(value) || value === "") {
-
+    // setPassword(value);
     // }
   };
 

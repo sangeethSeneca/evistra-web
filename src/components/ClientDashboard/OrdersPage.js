@@ -15,7 +15,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import OrderDetailDialog from "../FormDialog/OrderDetail";
 import axios from "axios";
 
-const OrderPage = () => {
+const MyOrderPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
@@ -25,11 +25,7 @@ const OrderPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://creepy-calf-gaiters.cyclic.app/orders", {
-          headers: {
-            Authorization: localStorage.getItem('token')
-          }
-        }
+          "https://creepy-calf-gaiters.cyclic.app/orders"
         );
         setOrders(response.data.orders);
       } catch (error) {
@@ -50,14 +46,14 @@ const OrderPage = () => {
 
   return (
     <>
-      <Typography variant="h4">{"Orders"}</Typography>
+      <Typography variant="h4">{"My Orders"}</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Customer Name</TableCell>
-              <TableCell>Price</TableCell>
+              <TableCell>Order Number</TableCell>
+              <TableCell>Order Date</TableCell>
+              <TableCell>Total</TableCell>
               <TableCell>State</TableCell>
             </TableRow>
           </TableHead>
@@ -89,4 +85,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default MyOrderPage;

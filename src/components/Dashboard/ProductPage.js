@@ -14,6 +14,7 @@ import {
 import AddProductDialog from "../FormDialog/AddEditProduct";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { toast, ToastContainer } from 'react-toastify';
 
 import axios from "axios";
 
@@ -24,16 +25,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://creepy-calf-gaiters.cyclic.app/products"
-        );
-        setProducts(response.data.products);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+
 
     fetchData();
   }, []);
@@ -41,6 +33,21 @@ const ProductPage = () => {
     setOpenDialog(true);
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://creepy-calf-gaiters.cyclic.app/products", {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        }
+      }
+      );
+      setProducts(response.data.products);
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedProduct(null);
@@ -56,12 +63,20 @@ const ProductPage = () => {
     setOpenDialog(true);
   };
 
-  const handleDelete = async (category) => {
+  const handleDelete = async (product) => {
     try {
       const response = await axios.delete(
-        "https://creepy-calf-gaiters.cyclic.app/products/delete"
+        "https://creepy-calf-gaiters.cyclic.app/products/delete", {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        },
+        data: product
+      }
       );
-      setProducts(response.data.products);
+      toast.success('Product Deleted successfully!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      fetchData();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -89,10 +104,10 @@ const ProductPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product) => (
+            {products?.map((product) => (
               <TableRow key={product.code}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>{product.name}</TableCell>
+                <TableCell>{product.modelId}</TableCell>
+                <TableCell>{product.modelName}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleEdit(product)}>

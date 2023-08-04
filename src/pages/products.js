@@ -46,7 +46,7 @@ function Products(props) {
     <>
       <h2>Products List</h2>
       <Grid container spacing={2}>
-        {data.map((product, index) => (
+        {data?.map((product, index) => (
           <Grid item xs={3} key={product.id}>
             <Item>
               <ProductCard

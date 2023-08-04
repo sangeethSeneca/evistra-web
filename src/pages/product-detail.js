@@ -6,6 +6,9 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/cartSlice";
+import { toast, ToastContainer } from 'react-toastify';
 
 const ProductDetailContainer = styled("div")({
   display: "flex",
@@ -218,8 +221,13 @@ const ProductKFText = styled(Typography)({
 
 function ProductDetailPage() {
   const router = useRouter();
+  const dispatch = useDispatch()
 
+<<<<<<< HEAD
   const { price, image, modelName, Description, Color, Brandname, BikeType, WheelSize, FrameMaterial, SuspensionType, SpecialFeature, IncludedComponents } = router.query;
+=======
+  const { price, image, modelName, Description, Color, Brandname, _id } = router.query;
+>>>>>>> 3e2336080f2b873b6f1478470e3dc5dc5dbdebb8
   const product = {
     image: "images/1.jpg",
     brand: "NCC",
@@ -241,7 +249,12 @@ function ProductDetailPage() {
 `;
 
   const handleAddToCart = () => {
-    console.log("Product added to cart");
+    toast.success('Added successfully!', {
+      position: toast.POSITION.TOP_RIGHT
+    });
+    let itemPrice = Number(price).toFixed(2);
+    dispatch(addItem({ _id, price: itemPrice, image, modelName, Description, Color, Brandname }));
+
   };
 
   return (
@@ -262,7 +275,7 @@ function ProductDetailPage() {
             <hr />
             <PriceContainer>
               <Price variant="h4" component="h2">
-                {price}
+                ${Number(price).toFixed(2)}
               </Price>
               <TaxText variant="body2">Excl Tax</TaxText>
             </PriceContainer>
@@ -280,6 +293,7 @@ function ProductDetailPage() {
                 </ColorContainer>
               </div>
             </ItemDescriptionContainer>
+<<<<<<< HEAD
             <FeaturesContainer>
               <Features variant="h2" component="h2">
                 Features
@@ -288,6 +302,9 @@ function ProductDetailPage() {
                 -</ItemDescription>
             </FeaturesContainer>
             <AddToCartButton variant="contained" onClick={handleAddToCart}>
+=======
+            <AddToCartButton variant="contained" onClick={() => handleAddToCart()}>
+>>>>>>> 3e2336080f2b873b6f1478470e3dc5dc5dbdebb8
               Add to Cart
             </AddToCartButton>
           </div>

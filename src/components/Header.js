@@ -11,14 +11,16 @@ import {
 import { useRouter } from "next/router";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
+import useAuthorization from "./hooks/useAuthorization";
+import ShoppingCart from "./Cart";
 
 const Header = () => {
   const router = useRouter();
+  const isAuthorized = useAuthorization();
 
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showSearchBox, setShowSearchBox] = useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -89,10 +91,14 @@ const Header = () => {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-
-            <Button color="inherit" onClick={() => handleNavigate("/login")}>
-              Login
-            </Button>
+            {!isAuthorized &&
+              <Button color="inherit" onClick={() => handleNavigate("/login")}>
+                Login
+              </Button>}
+            {isAuthorized &&
+              <Button color="inherit" onClick={() => handleNavigate(localStorage.getItem('userRole') === 'Admin' ? "/admin-dashboard" : "/client-dashboard")}>
+                {localStorage.getItem('userName')}
+              </Button>}
           </React.Fragment>
         )}
 
@@ -100,6 +106,7 @@ const Header = () => {
           <SearchIcon />
         </IconButton>
       </Toolbar>
+      <ShoppingCart open={open} setOpen={setOpen} />
     </AppBar>
   );
 };
