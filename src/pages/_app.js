@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
