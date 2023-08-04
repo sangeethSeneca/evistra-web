@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../store/cartSlice";
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 const ProductDetailContainer = styled("div")({
   display: "flex",
   alignItems: "center",

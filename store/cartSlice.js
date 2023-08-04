@@ -31,10 +31,13 @@ export const cartSlice = createSlice({
             itemsTemp.splice(findIndex, 1);
             state.items = [...itemsTemp];
         },
+        clearCart: (state, action) => {
+            state = initialState;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

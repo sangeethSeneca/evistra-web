@@ -13,11 +13,14 @@ import {
 } from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
 import useAuthorization from '../components/hooks/useAuthorization';
+import { toast, ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 function PaymentPage() {
     const [paymentOption, setPaymentOption] = useState('ondelivery"'); // Default payment option
     const [customerName, setCustomerName] = useState('');
     const [contactNumer, setContactNumber] = useState('');
+    const router = useRouter();
 
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -30,6 +33,13 @@ function PaymentPage() {
     const handlePaymentOptionChange = (event) => {
         setPaymentOption(event.target.value);
     };
+
+    const handlePayment = () => {
+        toast.success('Order Placed successfully!', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+        router.push('/order-success')
+    }
 
     return (
 
@@ -153,6 +163,9 @@ function PaymentPage() {
                             variant="contained"
                             color="primary"
                             startIcon={<PaymentIcon />}
+                            style={{ backgroundColor: "#3c6620" }}
+
+                            onClick={handlePayment}
                         >
                             {paymentOption === 'prepaid' ? "Pay Now" : "Place Order"}
                         </Button>

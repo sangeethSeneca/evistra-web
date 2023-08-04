@@ -7,7 +7,8 @@ import Footer from "../components/Footer";
 import { useRouter } from "next/router";
 import { Provider } from "react-redux";
 import { store } from "../../store";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const cache = createCache({ key: "css", prepend: true });
 
 function MyApp({ Component, pageProps }) {
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }) {
         <CssBaseline />
         {!isDisabled && <Header />}
         <Component {...pageProps} />
+        <ToastContainer />
         {!isDisabled && <Footer />}
       </CacheProvider>
     </Provider>
