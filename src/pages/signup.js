@@ -9,6 +9,8 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
   const router = useRouter();
 
   const handleFirstNameChange = (e) => {
@@ -63,6 +65,14 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!firstName || !email || !password) {
+      setError('Fill Required Fields')
+      return;
+    }
+    else if (password !== confirmPassword) {
+      setError('Password do not match')
+      return;
+    }
 
     const payload = {
       fName: firstName,
@@ -70,6 +80,7 @@ function Signup() {
       email: email,
       phoneNumber: phone,
       password: password,
+      userType: 'Customer',
     };
     try {
       const response = await axios.post(
@@ -157,6 +168,7 @@ function Signup() {
             />
           </label>
         </div>
+        <h4 style={{ color: "red" }}>{error ? error : null}</h4>
         <div style={styles.center}>
           <button type="submit" style={styles.button} onClick={handleSubmit}>
             Sign Up

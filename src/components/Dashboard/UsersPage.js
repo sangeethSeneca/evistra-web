@@ -16,6 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddUserDialog from "../FormDialog/AddEditUser";
 
 
 const UserPage = () => {
@@ -24,8 +25,6 @@ const UserPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-
-
     fetchData();
   }, []);
 
@@ -129,13 +128,14 @@ const UserPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <AddCategoryDialog
+      <AddUserDialog
         open={openDialog}
         onClose={handleCloseDialog}
         onAddProduct={handleAddCategory}
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
         title={selectedCategory ? "Edit" : "Add"}
+        fetchData={fetchData}
       />
     </>
   );
