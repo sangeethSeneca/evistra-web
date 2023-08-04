@@ -2,6 +2,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
+import { toast, ToastContainer } from 'react-toastify';
+
+
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -89,7 +92,9 @@ function Signup() {
       router.push('/login');
       setData(response.data.products);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error('User with this email already exists', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   };
 
