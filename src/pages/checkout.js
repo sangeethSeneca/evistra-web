@@ -71,11 +71,17 @@ const Checkout = () => {
   };
 
   const handleProceedToCheckout = () => {
-    router.push('/payment');
+    setOpenDialog(true);
+    //router.push('/payment');
   };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  };
+
+  const handleCheckout = () => {
+    handleCloseDialog(); // Close the dialog
+    router.push('/payment'); // Redirect to the payment page
   };
 
   return (
@@ -166,7 +172,7 @@ const Checkout = () => {
           <Button onClick={handleCloseDialog} color="primary">
             Close
           </Button>
-          <Button onClick={handleCloseDialog} color="primary" variant="contained">
+          <Button onClick={handleCheckout} color="primary" variant="contained">
             Checkout
           </Button>
         </DialogActions>

@@ -7,12 +7,12 @@ const AboutUs = () => {
         <img src="/images/logo.png" alt="Company Logo" width="400px" height="400px" />
         <div data-testid="description-1">
           <p style={styles.moto}>Dedicated to providing high-quality products and services.</p>
-          <p style={styles.textbody}>
+          <p data-testid="description-1" style={styles.textbody}>
             At our company, we strive to deliver excellence in everything we do. We
             value customer satisfaction and aim to build long-lasting relationships
             based on trust and reliability.
           </p>
-          <p data-testid="description-2">
+          <p data-testid="description-2" style={styles.textbody}>
             Our dedicated team works tirelessly to ensure that our products/services
             meet the highest standards. We continuously innovate and improve to stay
             ahead in the industry and provide the best solutions to our customers.
@@ -41,7 +41,8 @@ const styles = {
     marginLeft: "20px",
   },
   textbody: {
-    marginLeft: "20px",
+    marginLeft: "30px",
+    margin: "30px",
     fontSize: "18px",
     display: "flex",
   },
