@@ -34,7 +34,7 @@ const UserPage = () => {
       const response = await axios.get(
         "https://creepy-calf-gaiters.cyclic.app/users", {
         headers: {
-          Authorization: localStorage.getItem('token')
+          Authorization: window ? localStorage.getItem('token') : null
         }
       }
       );
@@ -67,7 +67,7 @@ const UserPage = () => {
       const response = await axios.delete(
         "https://creepy-calf-gaiters.cyclic.app/users/delete", {
         headers: {
-          Authorization: localStorage.getItem('token')
+          Authorization: window ? localStorage.getItem('token') : null
         },
         data: user
       }

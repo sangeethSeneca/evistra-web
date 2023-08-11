@@ -29,9 +29,9 @@ export default function Login() {
       const response = await axios.post(
         "https://creepy-calf-gaiters.cyclic.app/auth/signin", payload
       );
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userRole', response.data.userRole);
-      localStorage.setItem('userName', response.data.userName);
+      window ? localStorage.setItem('token', response.data.token) : null;
+      window ? localStorage.setItem('userRole', response.data.userRole) : null;
+      window ? localStorage.setItem('userName', response.data.userName) : null;
       if (response.data.userRole === 'Admin') {
         window.location.href = "/admin-dashboard";
       }

@@ -27,7 +27,7 @@ const OrderPage = () => {
         const response = await axios.get(
           "https://creepy-calf-gaiters.cyclic.app/orders", {
           headers: {
-            Authorization: localStorage.getItem('token')
+            Authorization: window ? localStorage.getItem('token') : null
           }
         }
         );

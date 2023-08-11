@@ -52,7 +52,7 @@ const ClientDashboard = () => {
                   <ListItemText primary={item} onClick={() => setNavItem(item)} />
                 </ListItem>
               ))}
-              <ListItem button onClick={() => { localStorage.clear(); window.location.href = "/"; }}>
+              <ListItem button onClick={() => { window ? localStorage.clear() : null; window.location.href = "/"; }}>
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>

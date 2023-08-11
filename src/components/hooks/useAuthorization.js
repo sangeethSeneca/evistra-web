@@ -2,13 +2,19 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const useAuthorization = () => {
+const useAuthorization = (value) => {
     const router = useRouter();
     const [isAuthorized, setIsAuthorized] = useState(false);
 
     useEffect(() => {
         // Get the token from localStorage
-        const token = localStorage.getItem('token');
+        const token = window ? localStorage.getItem('token') : null;
+        let auth = false;
+        const userRole = window ? localStorage.getItem('userRole') : null;
+        if (value === 'admin')
+            auth = userRole === 'Admin' ? true : false;
+        else if (value === 'client')
+            auth = userRole === 'admin' ? true : false;
         if (token) {
             setIsAuthorized(true);
         }

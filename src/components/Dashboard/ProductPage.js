@@ -38,7 +38,7 @@ const ProductPage = () => {
       const response = await axios.get(
         "https://creepy-calf-gaiters.cyclic.app/products", {
         headers: {
-          Authorization: localStorage.getItem('token')
+          Authorization: window ? localStorage.getItem('token') : null
         }
       }
       );
@@ -68,7 +68,7 @@ const ProductPage = () => {
       const response = await axios.delete(
         "https://creepy-calf-gaiters.cyclic.app/products/delete", {
         headers: {
-          Authorization: localStorage.getItem('token')
+          Authorization: window ? localStorage.getItem('token') : null
         },
         data: product
       }

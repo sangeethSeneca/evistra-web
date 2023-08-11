@@ -27,7 +27,7 @@ function PaymentPage() {
     const [province, setProvince] = useState('');
     const [zipCode, setZipCode] = useState('');
 
-    const token = localStorage.getItem('token');
+    const token = window ? localStorage.getItem('token') : null;
 
 
     const handlePaymentOptionChange = (event) => {

@@ -18,9 +18,7 @@ import UserPage from "../components/Dashboard/UsersPage";
 const Dashboard = () => {
   const router = useRouter();
   const [navItem, setNavItem] = useState("home");
-  const isAuthorized = useAuthorization();
-
-
+  const isAuthorized = useAuthorization('admin');
 
   const navItems = ["Categories", "Products", "Orders", "Customers", "Users"];
   if (isAuthorized) {
@@ -52,7 +50,7 @@ const Dashboard = () => {
                   <ListItemText primary={item} onClick={() => setNavItem(item)} />
                 </ListItem>
               ))}
-              <ListItem button onClick={() => { localStorage.clear(); window.location.href = "/"; }}>
+              <ListItem button onClick={() => { window ? localStorage.clear() : null; window.location.href = "/"; }}>
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>

@@ -148,7 +148,7 @@ const AddUserDialog = ({
               Cancel
             </Button>
             <Button variant="contained" color="success" type="submit">
-              {title}
+              {"Create"}
             </Button>
           </DialogActions>
         </Form>
