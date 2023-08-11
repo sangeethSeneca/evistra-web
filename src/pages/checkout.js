@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Grid,
@@ -25,39 +25,44 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 const Checkout = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItemsRedux = useSelector((state) => state.cart.items);
   const router = useRouter();
+
+  // State to manage cart items
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    // Set cart items when the component mounts
+    setCartItems([...cartItemsRedux]); // Use spread operator to create an independent copy
+  }, [cartItemsRedux]);
 
   const [openDialog, setOpenDialog] = useState(false);
 
-  const handleRemoveItem = (itemId) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-    setCartItems(updatedCartItems);
-  };
-
-  const handleIncreaseQuantity = (itemId) => {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === itemId) {
-        return { ...item, quantity: item.quantity + 1 };
-      }
-      return item;
+  const handleRemoveItem = (index) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = [...prevCartItems];
+      updatedCartItems.splice(index, 1);
+      return updatedCartItems;
     });
-    setCartItems(updatedCartItems);
   };
 
-  const handleDecreaseQuantity = (itemId) => {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === itemId && item.quantity > 1) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
+  const handleIncreaseQuantity = (index) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = JSON.parse(JSON.stringify(prevCartItems)); // Deep copy
+      updatedCartItems[index].quantity++;
+      return updatedCartItems;
     });
-    setCartItems(updatedCartItems);
   };
 
-
-
-
+  const handleDecreaseQuantity = (index) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = JSON.parse(JSON.stringify(prevCartItems)); // Deep copy
+      if (updatedCartItems[index].quantity > 1) {
+        updatedCartItems[index].quantity--;
+      }
+      return updatedCartItems;
+    });
+  };
 
   const calculateTotal = () => {
     const subtotal = parseFloat(calculateSubtotal(cartItems));
@@ -94,7 +99,7 @@ const Checkout = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {cartItems.map((item) => (
+                {cartItems.map((item, index) => (
                   <TableRow key={item._id}>
                     <TableCell>
                       <img
@@ -108,14 +113,14 @@ const Checkout = () => {
                     <TableCell>
                       <IconButton
                         aria-label="decrease"
-                        onClick={() => handleDecreaseQuantity(item.id)}
+                        onClick={() => handleDecreaseQuantity(index)}
                       >
                         <RemoveIcon />
                       </IconButton>
                       {item.quantity}
                       <IconButton
                         aria-label="increase"
-                        onClick={() => handleIncreaseQuantity(item.id)}
+                        onClick={() => handleIncreaseQuantity(index)}
                       >
                         <AddIcon />
                       </IconButton>
@@ -124,7 +129,7 @@ const Checkout = () => {
                     <TableCell>
                       <IconButton
                         aria-label="delete"
-                        onClick={() => handleRemoveItem(item.id)}
+                        onClick={() => handleRemoveItem(index)}
                       >
                         <DeleteIcon />
                       </IconButton>
