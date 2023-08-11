@@ -50,7 +50,7 @@ const Dashboard = () => {
                   <ListItemText primary={item} onClick={() => setNavItem(item)} />
                 </ListItem>
               ))}
-              <ListItem button onClick={() => { window ? localStorage.clear() : null; window.location.href = "/"; }}>
+              <ListItem button onClick={() => { typeof window !== "undefined" ? localStorage.clear() : null; window.location.href = "/"; }}>
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>

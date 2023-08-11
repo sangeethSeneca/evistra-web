@@ -8,9 +8,9 @@ const useAuthorization = (value) => {
 
     useEffect(() => {
         // Get the token from localStorage
-        const token = window ? localStorage.getItem('token') : null;
+        const token = typeof window !== "undefined" ? localStorage.getItem('token') : null;
         let auth = false;
-        const userRole = window ? localStorage.getItem('userRole') : null;
+        const userRole = typeof window !== "undefined" ? localStorage.getItem('userRole') : null;
         if (value === 'admin')
             auth = userRole === 'Admin' ? true : false;
         else if (value === 'client')

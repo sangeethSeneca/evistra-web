@@ -97,7 +97,7 @@ const Header = () => {
               </Button>}
             {isAuthorized &&
               <Button color="inherit" onClick={() => handleNavigate(localStorage.getItem('userRole') === 'Admin' ? "/admin-dashboard" : "/client-dashboard")}>
-                {window ? localStorage.getItem('userName') : null}
+                {typeof window !== "undefined" ? localStorage.getItem('userName') : null}
               </Button>}
           </React.Fragment>
         )}
