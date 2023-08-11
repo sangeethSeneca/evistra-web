@@ -165,7 +165,7 @@ const Checkout = () => {
           <Typography>Subtotal: ${calculateSubtotal(cartItems)}</Typography>
           <Typography>My Savings: ${calculateSavings(cartItems)}</Typography>
           <Typography>
-            Total before tax &amp; shipping: ${calculateTotal()}
+            Total before Tax &amp; Shipping: ${calculateTotal()}
           </Typography>
         </DialogContent>
         <DialogActions>

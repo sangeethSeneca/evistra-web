@@ -2,33 +2,32 @@ import React, { useState } from 'react';
 import {
     Button,
     Container,
-    CssBaseline,
     FormControl,
     FormControlLabel,
     Grid,
     Radio,
     RadioGroup,
     TextField,
-    Typography
+    Typography,
 } from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
-import useAuthorization from '../components/hooks/useAuthorization';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+
 function PaymentPage() {
-    const [paymentOption, setPaymentOption] = useState('ondelivery"'); // Default payment option
+    const [paymentOption, setPaymentOption] = useState('ondelivery');
     const [customerName, setCustomerName] = useState('');
-    const [contactNumer, setContactNumber] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
     const router = useRouter();
 
-    const [address, setAddress] = useState('');
+    const [streetNumber, setStreetNumber] = useState('');
+    const [streetName, setStreetName] = useState('');
+    const [apartmentNumber, setApartmentNumber] = useState('');
     const [city, setCity] = useState('');
     const [province, setProvince] = useState('');
     const [zipCode, setZipCode] = useState('');
-
-    const token = typeof window !== "undefined" ? localStorage.getItem('token') : null;
-
 
     const handlePaymentOptionChange = (event) => {
         setPaymentOption(event.target.value);
@@ -36,144 +35,108 @@ function PaymentPage() {
 
     const handlePayment = () => {
         toast.success('Order Placed successfully!', {
-            position: toast.POSITION.TOP_RIGHT
+            position: toast.POSITION.TOP_RIGHT,
         });
-        router.push('/order-success')
-    }
+        router.push('/order-success');
+    };
 
     return (
-
-        <Grid container spacing={2} style={{ minHeight: "80vh", padding: '20px' }}>
-            <Grid item xs={12}>
-                <Typography variant="h4" align="center">
-                    Payment and Shipping Details
-                </Typography>
-            </Grid>
-            <Grid item xs={6}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <FormControl component="fieldset">
-                            <RadioGroup
-                                aria-label="payment-option"
-                                name="paymentOption"
-                                value={paymentOption}
-                                onChange={handlePaymentOptionChange}
-                            >
-                                <FormControlLabel value="ondelivery" control={<Radio />} label="On-Delivery" />
-
-                                <FormControlLabel value="prepaid" control={<Radio />} label="Pre-paid" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item xs={6} fullWidth style={{ width: '100%' }}>
-                <Grid container spacing={2} fullWidth>
-                    {!token && <>
-                        <Grid item xs={12}>
-                            <TextField label="Name" fullWidth />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField label="Email" fullWidth />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField label="Contact Number" fullWidth />
-                        </Grid>
-                    </>}
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="address"
-                            label="Shipping Address"
-                            name="address"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="city"
-                            label="City"
-                            name="city"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="province"
-                            label="Province"
-                            name="province"
-                            value={province}
-                            onChange={(e) => setProvince(e.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="zipCode"
-                            label="ZIP Code"
-                            name="zipCode"
-                            value={zipCode}
-                            onChange={(e) => setZipCode(e.target.value)}
-                        />
-                    </Grid>
-                    {paymentOption === 'prepaid' && <>
-                        <Grid item xs={12}>
+        <Container maxWidth="md" style={{ marginTop: '40px', padding: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
+            <Typography variant="h4" align="center" gutterBottom>
+                Payment and Shipping Details
+            </Typography>
+            <Grid container spacing={2}>
+                <Grid item>
+                    <Grid container spacing={2}>
+                        {/* Street Number */}
+                        <Grid item xs={3}>
                             <TextField
-                                variant="outlined"
+                                label="Street Number"
                                 fullWidth
-                                id="cardNumber"
-                                label="Card Number"
-                                name="cardNumber"
+                                value={streetNumber}
+                                onChange={(e) => setStreetNumber(e.target.value)}
+                            />
+                        </Grid>
+                        {/* Street Name */}
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Street Name"
+                                fullWidth
+                                value={streetName}
+                                onChange={(e) => setStreetName(e.target.value)}
+                            />
+                        </Grid>
+                        {/* Apartment Number */}
+                        <Grid item xs={3}>
+                            <TextField
+                                label="Apt. No."
+                                fullWidth
+                                value={apartmentNumber}
+                                onChange={(e) => setApartmentNumber(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                variant="outlined"
+                                label="City"
                                 fullWidth
-                                id="expiry"
-                                label="Expiry Date"
-                                name="expiry"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                variant="outlined"
+                                label="Province"
                                 fullWidth
-                                id="cvv"
-                                label="CVV"
-                                name="cvv"
+                                value={province}
+                                onChange={(e) => setProvince(e.target.value)}
                             />
-                        </Grid></>}
-
-
-
-                    <Grid item xs={12}>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            startIcon={<PaymentIcon />}
-                            style={{ backgroundColor: "#3c6620" }}
-
-                            onClick={handlePayment}
-                        >
-                            {paymentOption === 'prepaid' ? "Pay Now" : "Place Order"}
-                        </Button>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                label="ZIP Code"
+                                fullWidth
+                                value={zipCode}
+                                onChange={(e) => setZipCode(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <FormControl component="fieldset">
+                                <RadioGroup
+                                    aria-label="payment-option"
+                                    name="paymentOption"
+                                    value={paymentOption}
+                                    onChange={handlePaymentOptionChange}
+                                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+                                >
+                                    <FormControlLabel
+                                        value="ondelivery"
+                                        control={<Radio color="primary" />}
+                                        label="On-Delivery"
+                                    />
+                                    <FormControlLabel
+                                        value="prepaid"
+                                        control={<Radio color="primary" />}
+                                        label="Pre-paid"
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    startIcon={<PaymentIcon />}
+                    style={{ backgroundColor: '#3c6620', borderRadius: '5px', fontWeight: 'bold', padding: '10px 40px' }}
+                    onClick={handlePayment}
+                >
+                    {paymentOption === 'prepaid' ? 'Pay Now' : 'Place Order'}
+                </Button>
+            </div>
+        </Container>
     );
 }
 
