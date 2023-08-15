@@ -13,10 +13,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import useAuthorization from "./hooks/useAuthorization";
 import ShoppingCart from "./Cart";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const router = useRouter();
   const isAuthorized = useAuthorization();
+  const cartItemsRedux = useSelector((state) => state.cart.items);
 
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -82,6 +84,7 @@ const Header = () => {
               Contact
             </Button>
             <IconButton
+              style={{ marginRight: '5px' }}
               edge="end"
               color="inherit"
               aria-label="cart"
@@ -90,6 +93,13 @@ const Header = () => {
               <Badge color="error">
                 <ShoppingCartIcon />
               </Badge>
+              {cartItemsRedux.length > 0 && <span style={{
+                position: 'absolute',
+                top: '-8px',
+                right: '-3px',
+                color: 'white',
+
+              }}>{cartItemsRedux.length}</span>}
             </IconButton>
             {!isAuthorized &&
               <Button color="inherit" onClick={() => handleNavigate("/login")}>

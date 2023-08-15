@@ -2,10 +2,12 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from 'react-toastify';
+import { setUserInfo } from "../../store/userSlice";
 export default function Login() {
   const router = useRouter();
-
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,6 +31,12 @@ export default function Login() {
       const response = await axios.post(
         "https://creepy-calf-gaiters.cyclic.app/auth/signin", payload
       );
+      dispatch(setUserInfo({
+        userRole: response.data.userRole,
+        userName: response.data.userName,
+        userId: response.data?.userId,
+        contactNumber: response.data?.contactNumber,
+      }));
       typeof window !== "undefined" ? localStorage.setItem('token', response.data.token) : null;
       typeof window !== "undefined" ? localStorage.setItem('userRole', response.data.userRole) : null;
       typeof window !== "undefined" ? localStorage.setItem('userName', response.data.userName) : null;

@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 
 const Checkout = () => {
   const cartItemsRedux = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.user.userInfo);
   const router = useRouter();
 
   // State to manage cart items
@@ -167,14 +168,20 @@ const Checkout = () => {
           <Typography>
             Total before Tax &amp; Shipping: ${calculateTotal()}
           </Typography>
+          {!user?.userName &&
+            <Typography variant="h6" color='secondary'>Please login to proceed with the order</Typography>}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
             Close
           </Button>
-          <Button onClick={handleCheckout} color="primary" variant="contained">
-            Checkout
-          </Button>
+          {!user?.userName ?
+            <Button onClick={() => router.push('login')} color="primary" variant="contained">
+              Login
+            </Button> :
+            <Button onClick={handleCheckout} color="primary" variant="contained">
+              Checkout
+            </Button>}
         </DialogActions>
       </Dialog>
     </Container>

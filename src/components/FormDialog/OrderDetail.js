@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
+const OrderDetailDialog = ({ open, onClose, onAddProduct, selectedOrder }) => {
   const [categoryCode, setCategoryCode] = useState("");
   const [categoryName, setCategoryName] = useState("");
 
@@ -65,7 +65,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
           <Grid item xs={4}>
             <TextField
               label="Order ID"
-              value={categoryCode}
+              value={selectedOrder?._id}
               onChange={handleCategoryCodeChange}
               fullWidth
               sx={{ margin: "10px auto" }}
@@ -75,7 +75,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
             <TextField
               label="Customer Name"
               type="text"
-              value={categoryName}
+              value={selectedOrder?.customerName}
               onChange={handleCategoryNameChange}
               sx={{ margin: "10px auto" }}
               fullWidth
@@ -85,7 +85,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
             <TextField
               label="Amount"
               type="number"
-              value={categoryName}
+              value={selectedOrder?.totalAmount}
               onChange={handleCategoryNameChange}
               sx={{ margin: "10px auto" }}
               fullWidth
@@ -96,7 +96,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
               label="Order Date"
               type="date"
               InputLabelProps={{ shrink: true, required: true }}
-              value={categoryName}
+              value={selectedOrder?.orderDate}
               onChange={handleCategoryNameChange}
               sx={{ margin: "10px auto" }}
               fullWidth
@@ -106,7 +106,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
             <TextField
               label="Order State"
               type="text"
-              value={categoryName}
+              value={selectedOrder?.orderState ? selectedOrder?.orderState : "NEW"}
               onChange={handleCategoryNameChange}
               sx={{ margin: "10px auto" }}
               fullWidth
@@ -120,14 +120,16 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct }) => {
                 <TableCell>Product Code</TableCell>
                 <TableCell>Product Name</TableCell>
                 <TableCell>Price</TableCell>
+                <TableCell>Quantity</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product) => (
-                <TableRow key={product.code}>
-                  <TableCell>{product.code}</TableCell>
+              {selectedOrder?.productsList?.map((product) => (
+                <TableRow key={product._id}>
+                  <TableCell>{product._id}</TableCell>
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.price}</TableCell>
+                  <TableCell>{product.quantity}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -14,6 +14,7 @@ import CategoryPage from "../components/Dashboard/CategoryPage";
 import { useRouter } from "next/router";
 import useAuthorization from "../components/hooks/useAuthorization";
 import UserPage from "../components/Dashboard/UsersPage";
+import { persistor } from "../../store";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const Dashboard = () => {
                   <ListItemText primary={item} onClick={() => setNavItem(item)} />
                 </ListItem>
               ))}
-              <ListItem button onClick={() => { typeof window !== "undefined" ? localStorage.clear() : null; window.location.href = "/"; }}>
+              <ListItem button onClick={() => { if (typeof window !== "undefined") { persistor.purge(); localStorage.clear(); window.location.href = "/"; } }}>
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>

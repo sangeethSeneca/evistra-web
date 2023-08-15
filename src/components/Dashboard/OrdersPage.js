@@ -40,10 +40,11 @@ const OrderPage = () => {
     fetchData();
   }, []);
 
-  const handleOpenDialog = () => {
+
+  const handleOpenDialog = (order) => {
+    setSelectedOrder(order);
     setOpenDialog(true);
   };
-
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -58,18 +59,20 @@ const OrderPage = () => {
               <TableCell>ID</TableCell>
               <TableCell>Customer Name</TableCell>
               <TableCell>Price</TableCell>
+              <TableCell>Order Date</TableCell>
               <TableCell>State</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{product.price}</TableCell>
-                <TableCell>{product.state}</TableCell>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell>{order._id}</TableCell>
+                <TableCell>{order.customerName}</TableCell>
+                <TableCell>{order.totalAmount}</TableCell>
+                <TableCell>{order.orderDate}</TableCell>
+                <TableCell>{order.state ? order.state : "NEW"}</TableCell>
                 <TableCell>
-                  <IconButton onClick={handleOpenDialog}>
+                  <IconButton onClick={() => handleOpenDialog(order)}>
                     <VisibilityIcon />
                   </IconButton>
                 </TableCell>

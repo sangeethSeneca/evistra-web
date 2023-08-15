@@ -25,7 +25,11 @@ const MyOrderPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://creepy-calf-gaiters.cyclic.app/orders"
+          "https://creepy-calf-gaiters.cyclic.app/orders", {
+          headers: {
+            Authorization: typeof window !== "undefined" ? localStorage.getItem('token') : null
+          }
+        }
         );
         setOrders(response.data.orders);
       } catch (error) {
@@ -36,7 +40,8 @@ const MyOrderPage = () => {
     fetchData();
   }, []);
 
-  const handleOpenDialog = () => {
+  const handleOpenDialog = (order) => {
+    setSelectedOrder(order);
     setOpenDialog(true);
   };
 
@@ -51,21 +56,23 @@ const MyOrderPage = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Order Number</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Customer Name</TableCell>
+              <TableCell>Price</TableCell>
               <TableCell>Order Date</TableCell>
-              <TableCell>Total</TableCell>
               <TableCell>State</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{product.price}</TableCell>
-                <TableCell>{product.state}</TableCell>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell>{order._id}</TableCell>
+                <TableCell>{order.customerName}</TableCell>
+                <TableCell>{order.totalAmount}</TableCell>
+                <TableCell>{order.orderDate}</TableCell>
+                <TableCell>{order.state ? order.state : "NEW"}</TableCell>
                 <TableCell>
-                  <IconButton onClick={handleOpenDialog}>
+                  <IconButton onClick={() => handleOpenDialog(order)}>
                     <VisibilityIcon />
                   </IconButton>
                 </TableCell>

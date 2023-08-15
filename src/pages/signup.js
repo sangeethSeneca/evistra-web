@@ -69,7 +69,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!firstName || !email || !password) {
+    if (!firstName || !email || !password || !phone) {
       setError('Fill Required Fields')
       return;
     }
@@ -85,7 +85,7 @@ function Signup() {
       fName: firstName,
       lName: lastName,
       email: email,
-      phoneNumber: phone,
+      contactNumber: phone,
       password: password,
       userType: 'Customer',
     };
@@ -112,7 +112,7 @@ function Signup() {
               type="text"
               value={firstName}
               onChange={handleFirstNameChange}
-              placeholder="First Name"
+              placeholder="First Name*"
               style={styles.inputName}
               required
             />
@@ -134,7 +134,7 @@ function Signup() {
               type="email"  // Change the type to "email"
               value={email}
               onChange={handleEmailChange}
-              placeholder="Email"
+              placeholder="Email*"
               style={styles.input}
               required
             />
@@ -147,7 +147,7 @@ function Signup() {
               type="phone"
               value={phone}
               onChange={handlePhoneChange}
-              placeholder="Phone number"
+              placeholder="Phone number*"
               style={styles.input}
               required
             />
@@ -159,7 +159,7 @@ function Signup() {
               type="password"
               value={password}
               onChange={handlePasswordChange}
-              placeholder="Password"
+              placeholder="Password*"
               style={styles.input}
               required
             />
@@ -171,7 +171,7 @@ function Signup() {
               type="password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
-              placeholder="Confirm Password"
+              placeholder="Confirm Password*"
               style={styles.input}
               required
             />

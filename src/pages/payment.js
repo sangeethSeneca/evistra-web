@@ -15,12 +15,17 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { calculateSavings, calculateSubtotal } from '../util/commonUtil';
 
 function PaymentPage() {
     const [paymentOption, setPaymentOption] = useState('ondelivery');
     const [customerName, setCustomerName] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const router = useRouter();
+    const user = useSelector((state) => state.user.userInfo);
+    const cartItems = useSelector((state) => state.cart.items);
 
     const [streetNumber, setStreetNumber] = useState('');
     const [streetName, setStreetName] = useState('');
@@ -28,20 +33,54 @@ function PaymentPage() {
     const [city, setCity] = useState('');
     const [province, setProvince] = useState('');
     const [zipCode, setZipCode] = useState('');
+    const [error, setError] = useState(false);
 
     const handlePaymentOptionChange = (event) => {
         setPaymentOption(event.target.value);
     };
 
-    const handlePayment = () => {
-        toast.success('Order Placed successfully!', {
-            position: toast.POSITION.TOP_RIGHT,
-        });
-        router.push('/order-success');
+    const calculateTotal = () => {
+        const subtotal = parseFloat(calculateSubtotal(cartItems));
+        const savings = parseFloat(calculateSavings(cartItems));
+        return (subtotal - savings).toFixed(2);
+    };
+
+
+    const handlePayment = async () => {
+        if (!streetNumber || !streetName || !city || !province || !zipCode) {
+            setError(true);
+            toast.error('Fill mandatory Fields!', {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+        else {
+            try {
+                const response = await axios.post(
+                    "https://creepy-calf-gaiters.cyclic.app/orders/add", {
+                    customerId: user.userId,
+                    customerName: user.userName,
+                    contactNumber: user.contactNumber,
+                    orderDate: new Date(),
+                    totalAmount: calculateTotal(),
+                    discount: '10%',
+                    productsList: cartItems
+                }
+                );
+
+                toast.success('Order Placed successfully!', {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                router.push('/order-success');
+            } catch (error) {
+                toast.error(error, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            }
+        }
     };
 
     return (
-        <Container maxWidth="md" style={{ marginTop: '40px', padding: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
+        <Container maxWidth="md" style={{ height: "80vh", marginTop: '40px', padding: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
             <Typography variant="h4" align="center" gutterBottom>
                 Payment and Shipping Details
             </Typography>
@@ -53,6 +92,8 @@ function PaymentPage() {
                             <TextField
                                 label="Street Number"
                                 fullWidth
+                                required
+                                error={!streetNumber && error}
                                 value={streetNumber}
                                 onChange={(e) => setStreetNumber(e.target.value)}
                             />
@@ -62,7 +103,9 @@ function PaymentPage() {
                             <TextField
                                 label="Street Name"
                                 fullWidth
+                                required
                                 value={streetName}
+                                error={!streetName && error}
                                 onChange={(e) => setStreetName(e.target.value)}
                             />
                         </Grid>
@@ -79,7 +122,9 @@ function PaymentPage() {
                             <TextField
                                 label="City"
                                 fullWidth
+                                required
                                 value={city}
+                                error={!city && error}
                                 onChange={(e) => setCity(e.target.value)}
                             />
                         </Grid>
@@ -87,7 +132,9 @@ function PaymentPage() {
                             <TextField
                                 label="Province"
                                 fullWidth
+                                required
                                 value={province}
+                                error={!province && error}
                                 onChange={(e) => setProvince(e.target.value)}
                             />
                         </Grid>
@@ -95,7 +142,9 @@ function PaymentPage() {
                             <TextField
                                 label="ZIP Code"
                                 fullWidth
+                                required
                                 value={zipCode}
+                                error={!zipCode && error}
                                 onChange={(e) => setZipCode(e.target.value)}
                             />
                         </Grid>

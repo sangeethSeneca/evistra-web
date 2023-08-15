@@ -14,6 +14,7 @@ import CategoryPage from "../components/Dashboard/CategoryPage";
 import { useRouter } from "next/router";
 import useAuthorization from "../components/hooks/useAuthorization";
 import MyOrderPage from "../components/ClientDashboard/OrdersPage";
+import { persistor } from "../../store";
 
 const ClientDashboard = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const ClientDashboard = () => {
                   <ListItemText primary={item} onClick={() => setNavItem(item)} />
                 </ListItem>
               ))}
-              <ListItem button onClick={() => { typeof window !== "undefined" ? localStorage.clear() : null; window.location.href = "/"; }}>
+              <ListItem button onClick={() => { if (typeof window !== "undefined") { persistor.purge(); localStorage.clear(); window.location.href = "/"; } }}>
                 <ListItemText primary="Logout" />
               </ListItem>
             </List>
@@ -67,7 +68,7 @@ const ClientDashboard = () => {
             {navItem === "Categories" && <CategoryPage />}
           </Paper>
         </Grid>
-      </Grid>
+      </Grid >
     );
   } else return <></>;
 };
