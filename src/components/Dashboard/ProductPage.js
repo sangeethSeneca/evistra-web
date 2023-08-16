@@ -25,10 +25,13 @@ const ProductPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-
-
     fetchData();
-  }, []);
+    if (!openDialog) {
+      setSelectedProduct(null);
+    }
+  }, [openDialog]);
+
+
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };

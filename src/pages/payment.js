@@ -15,9 +15,10 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { calculateSavings, calculateSubtotal } from '../util/commonUtil';
+import { clearCart } from '../../store/cartSlice';
 
 function PaymentPage() {
     const [paymentOption, setPaymentOption] = useState('ondelivery');
@@ -26,6 +27,7 @@ function PaymentPage() {
     const router = useRouter();
     const user = useSelector((state) => state.user.userInfo);
     const cartItems = useSelector((state) => state.cart.items);
+    const dispatch = useDispatch()
 
     const [streetNumber, setStreetNumber] = useState('');
     const [streetName, setStreetName] = useState('');
@@ -63,13 +65,15 @@ function PaymentPage() {
                     orderDate: new Date(),
                     totalAmount: calculateTotal(),
                     discount: '10%',
-                    productsList: cartItems
+                    productsList: cartItems,
+                    state: "NEW"
                 }
                 );
 
                 toast.success('Order Placed successfully!', {
                     position: toast.POSITION.TOP_RIGHT,
                 });
+                dispatch(clearCart({}));
                 router.push('/order-success');
             } catch (error) {
                 toast.error(error, {

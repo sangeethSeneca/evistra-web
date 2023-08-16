@@ -16,13 +16,17 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import CustomSelect from "../common/reactSelect";
+import ImageUpload from "../common/imageUploader";
+import { toast } from "react-toastify";
 
-const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
+const AddProductDialog = ({ open, onClose, onAddProduct, selectedProduct, title = "Add" }) => {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productCode, setProductCode] = useState("");
   const [categories, setCategories] = useState([]);
-
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [imageURL, setImageURL] = useState(selectedProduct ? selectedProduct.image : '');
   const colorList = [
     { value: "black", label: "black", type: "" },
     { value: "white", label: "white", type: "" },
@@ -61,32 +65,56 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
   };
 
   const initialValues = {
-    modelNumer: "",
-    modelName: "",
-    price: "",
-    color: "",
-    year: "",
-    category: "",
-    description: "",
+    modelId: selectedProduct ? selectedProduct.modelId : "",
+    modelName: selectedProduct ? selectedProduct.modelName : "",
+    price: selectedProduct ? selectedProduct.price : "",
+    Color: selectedProduct ? selectedProduct.Color : "",
+    year: selectedProduct ? selectedProduct.year : "",
+    Brandname: selectedProduct ? selectedProduct.Brandname : "",
+    category: selectedProduct ? selectedProduct.category : "",
+    Description: selectedProduct ? selectedProduct.Description : "",
   };
 
   const validationSchema = Yup.object({
-    modelNumer: Yup.string().required("Model Numer is required"),
+    modelId: Yup.string().required("Model Numer is required"),
     modelName: Yup.string().required("Model Name is required"),
+    Brandname: Yup.string().required("Brand Name is required"),
     price: Yup.string().required("Price is required"),
+    Color: Yup.string().required("Color is required"),
+    Description: Yup.string().required("Description is required"),
   });
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    let payload = { ...values, image: imageURL }
     try {
-      const response = await axios.get(
-        "https://creepy-calf-gaiters.cyclic.app/product/add",
-        values
-      );
-
-      setCategories(list);
+      if (selectedProduct) {
+        const response = await axios.put(
+          "https://creepy-calf-gaiters.cyclic.app/products/edit",
+          { ...selectedProduct, ...payload }, {
+          headers: {
+            Authorization: typeof window !== "undefined" ? localStorage.getItem('token') : null
+          }
+        }
+        );
+      }
+      else {
+        const response = await axios.post(
+          "https://creepy-calf-gaiters.cyclic.app/products/add",
+          payload, {
+          headers: {
+            Authorization: typeof window !== "undefined" ? localStorage.getItem('token') : null
+          }
+        }
+        );
+      }
+      toast.success('Added successfully!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      setSelectedImage(null);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error('Something went wrong!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     } finally {
       onClose();
     }
@@ -121,13 +149,13 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
           <DialogContent>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
-                name="modelNumer"
+                name="modelId"
                 as={TextField}
                 label="Model Number"
                 fullWidth
               />
               <ErrorMessage
-                name="modelNumer"
+                name="modelId"
                 component="div"
                 style={{ fontSize: "11px", color: "red" }}
               />
@@ -175,6 +203,21 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
+                name="Brandname"
+                as={TextField}
+                label="Brand Name"
+                fullWidth
+                sx={{ margin: "10px auto" }}
+              />
+              <ErrorMessage
+                name="Brandname"
+                component="div"
+                style={{ fontSize: "11px", color: "red" }}
+              />
+            </FormControl>
+
+            <FormControl fullWidth sx={{ margin: "10px auto" }}>
+              <Field
                 name="year"
                 as={TextField}
                 label="Year"
@@ -189,14 +232,14 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
             </FormControl>
             <FormControl fullWidth sx={{ margin: "10px auto" }}>
               <Field
-                name="color"
+                name="Color"
                 as={CustomSelect}
                 options={colorList}
                 label="Color"
               />
 
               <ErrorMessage
-                name="category"
+                name="Color"
                 component="div"
                 style={{ fontSize: "11px", color: "red" }}
               />
@@ -205,12 +248,13 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
               <Field
                 as={TextareaAutosize}
                 fullWidth
-                name="description"
+                name="Description"
                 sx={{ margin: "10px auto" }}
                 minRows={5}
                 placeholder="Description"
               />
-
+              <ImageUpload setImageURL={setImageURL} imageURL={selectedProduct ? selectedProduct.image : ''} setSelectedImage={setSelectedImage} selectedImage={selectedImage} uploading={uploading}
+                setUploading={setUploading} />
               <ErrorMessage
                 name="description"
                 component="div"
@@ -225,7 +269,7 @@ const AddProductDialog = ({ open, onClose, onAddProduct, title = "Add" }) => {
               Cancel
             </Button>
             <Button variant="contained" color="success" type="submit">
-              Add
+              {title}
             </Button>
           </DialogActions>
         </Form>

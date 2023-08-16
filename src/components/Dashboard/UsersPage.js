@@ -21,12 +21,15 @@ import AddUserDialog from "../FormDialog/AddEditUser";
 
 const UserPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState({});
+  const [selectedUser, setSelectedUser] = useState({});
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+    if (!openDialog) {
+      setSelectedUser(null);
+    }
+  }, [openDialog]);
 
 
   const fetchData = async () => {
@@ -49,16 +52,16 @@ const UserPage = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-    setSelectedCategory(null);
+    setSelectedUser(null);
   };
 
   const handleAddCategory = (newProduct) => {
     setUsers([...users, newProduct]);
-    setSelectedCategory(null);
+    setSelectedUser(null);
   };
 
   const handleEdit = (category) => {
-    setSelectedCategory(category);
+    setSelectedUser(category);
     setOpenDialog(true);
   };
 
@@ -132,9 +135,9 @@ const UserPage = () => {
         open={openDialog}
         onClose={handleCloseDialog}
         onAddProduct={handleAddCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedCategory={selectedCategory}
-        title={selectedCategory ? "Edit" : "Add"}
+        setSelectedCategory={setSelectedUser}
+        selectedCategory={selectedUser}
+        title={selectedUser ? "Edit" : "Add"}
         fetchData={fetchData}
       />
     </>

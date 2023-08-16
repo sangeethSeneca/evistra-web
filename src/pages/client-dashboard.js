@@ -15,13 +15,19 @@ import { useRouter } from "next/router";
 import useAuthorization from "../components/hooks/useAuthorization";
 import MyOrderPage from "../components/ClientDashboard/OrdersPage";
 import { persistor } from "../../store";
+import { useSelector } from "react-redux";
 
 const ClientDashboard = () => {
   const router = useRouter();
   const [navItem, setNavItem] = useState("home");
   const isAuthorized = useAuthorization();
+  const user = useSelector((state) => state.user.userInfo);
 
-
+  useEffect(() => {
+    if (user.userRole !== 'Customer') {
+      router.push('/');
+    }
+  }, [user])
 
   const navItems = ["My Orders", "Messages", "Settings"];
   if (isAuthorized) {

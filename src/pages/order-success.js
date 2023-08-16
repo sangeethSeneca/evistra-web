@@ -29,9 +29,8 @@ function OrderPlacedPage() {
                 <Button
                     variant="contained"
                     color="primary"
-                    style={{ marginTop: '1rem' }}
                     onClick={handlePaymentSuccess}
-                    style={{ backgroundColor: "#3c6620" }}
+                    style={{ arginTop: '1rem', backgroundColor: "#3c6620" }}
                 >
                     Continue Shopping
                 </Button>

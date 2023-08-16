@@ -17,6 +17,9 @@ import {
   Table,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,6 +30,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const OrderDetailDialog = ({ open, onClose, onAddProduct, selectedOrder }) => {
+  const user = useSelector((state) => state.user.userInfo);
   const [categoryCode, setCategoryCode] = useState("");
   const [categoryName, setCategoryName] = useState("");
 
@@ -53,6 +57,31 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct, selectedOrder }) => {
     setCategoryCode("");
     setCategoryName("");
     onClose();
+  };
+
+
+  const handleConfirm = async (stateParam) => {
+    try {
+      if (selectedOrder) {
+        const response = await axios.put(
+          "https://creepy-calf-gaiters.cyclic.app/orders/edit",
+          { ...selectedOrder, state: stateParam }, {
+          headers: {
+            Authorization: typeof window !== "undefined" ? localStorage.getItem('token') : null
+          }
+        }
+        );
+      }
+      toast.success(`Order ${stateParam} successfully!`, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    } catch (error) {
+      toast.error('Something went wrong!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    } finally {
+      onClose();
+    }
   };
 
   return (
@@ -106,7 +135,7 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct, selectedOrder }) => {
             <TextField
               label="Order State"
               type="text"
-              value={selectedOrder?.orderState ? selectedOrder?.orderState : "NEW"}
+              value={selectedOrder?.state ? selectedOrder?.state : "NEW"}
               onChange={handleCategoryNameChange}
               sx={{ margin: "10px auto" }}
               fullWidth
@@ -140,14 +169,15 @@ const OrderDetailDialog = ({ open, onClose, onAddProduct, selectedOrder }) => {
         sx={{ backgroundColor: "#e1e8e5", color: "#FFF !important" }}
       >
         <Button variant="outlined" onClick={onClose}>
-          Cancel
+          Back
         </Button>
-        <Button onClick={handleAddCategory} variant="contained" color="error">
+        {(selectedOrder?.state === "NEW" || selectedOrder?.state === undefined) && user.userRole == 'Customer' && <Button onClick={() => handleConfirm("Cancel")} variant="contained" color="warning">Cancel</Button>}
+        {user.userRole == 'Admin' && (<Button onClick={() => handleConfirm("Rejected")} variant="contained" color="error">
           Reject
-        </Button>
-        <Button onClick={handleAddCategory} variant="contained" color="success">
+        </Button>)}e
+        {(selectedOrder?.state === "NEW" || selectedOrder?.state === undefined) && user.userRole == 'Admin' && <Button onClick={() => handleConfirm("Confirmed")} variant="contained" color="success">
           Confirmed
-        </Button>
+        </Button>}
       </DialogActions>
     </Dialog>
   );

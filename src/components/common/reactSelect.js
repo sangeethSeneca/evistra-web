@@ -21,7 +21,7 @@ const CustomSelect = ({ label, options, ...props }) => {
             {...field}
             {...props}
             options={formattedOptions}
-            onChange={(option) => form.setFieldValue(field.name, option)}
+            onChange={(option) => form.setFieldValue(field.name, option.value)}
             onBlur={field.onBlur}
             value={formattedOptions.find(
               (option) => option.value === field.value

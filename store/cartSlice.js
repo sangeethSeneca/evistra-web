@@ -32,7 +32,9 @@ export const cartSlice = createSlice({
             state.items = [...itemsTemp];
         },
         clearCart: (state, action) => {
-            state = initialState;
+            state.items = [];
+            state.discount = 0;
+            state.total = 0;
         },
     },
 })

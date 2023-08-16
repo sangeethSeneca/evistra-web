@@ -38,7 +38,10 @@ const OrderPage = () => {
     };
 
     fetchData();
-  }, []);
+    if (!openDialog) {
+      setSelectedOrder(null);
+    }
+  }, [openDialog]);
 
 
   const handleOpenDialog = (order) => {
