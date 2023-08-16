@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
+import Loader from "../components/common/Loader";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,16 +20,21 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Products(props) {
   const [data, setData] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           "https://creepy-calf-gaiters.cyclic.app/products"
         );
         setData(response.data.products);
+
       } catch (error) {
         console.error("Error fetching data:", error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -46,6 +53,7 @@ function Products(props) {
     <>
       <h2>Products List</h2>
       <Grid container spacing={2}>
+        {loading && <Loader />}
         {data?.map((product, index) => (
           <Grid item xs={3} key={product.id}>
             <Item>
