@@ -94,7 +94,6 @@ function Signup() {
         "https://creepy-calf-gaiters.cyclic.app/auth/register", payload
       );
       router.push('/login');
-      setData(response.data.products);
     } catch (error) {
       toast.error('User with this email already exists', {
         position: toast.POSITION.TOP_RIGHT

@@ -64,7 +64,7 @@ const MyOrderPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((order) => (
+            {orders && orders.length > 0 && orders.map((order) => (
               <TableRow key={order.id}>
                 <TableCell>{order._id}</TableCell>
                 <TableCell>{order.customerName}</TableCell>
